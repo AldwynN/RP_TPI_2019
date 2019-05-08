@@ -14,13 +14,12 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
 --
--- Création et utilisation du schema direct_prod
+-- Création du schema de la base de données
 --
-
 CREATE DATABASE direct_prod;
 USE direct_prod;
+
 
 --
 -- Table structure for table `advertisement`
@@ -107,6 +106,30 @@ LOCK TABLES `rate` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `roles` (
+  `code` int(11) NOT NULL,
+  `roleName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'registered'),(2,'administrator');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -120,10 +143,12 @@ CREATE TABLE `user` (
   `canton` varchar(45) DEFAULT NULL,
   `postCode` varchar(45) DEFAULT NULL,
   `streetAndNumber` varchar(45) DEFAULT NULL,
-  `admin` tinyint(4) DEFAULT NULL,
   `description` text,
   `salt` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`email`)
+  `roles_code` int(11) NOT NULL,
+  PRIMARY KEY (`email`),
+  KEY `fk_user_roles1_idx` (`roles_code`),
+  CONSTRAINT `fk_user_roles1` FOREIGN KEY (`roles_code`) REFERENCES `roles` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -145,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-07 16:02:52
+-- Dump completed on 2019-05-08 12:54:06

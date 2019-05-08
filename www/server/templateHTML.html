@@ -3,18 +3,63 @@
 
 <head>
     <title>Template</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- Bootstrap CSS & JS -->
-    <link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../css/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href='../css/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
+    <script src='../css/bootstrap/js/bootstrap.min.js' type='text/javascript'></script>
 </head>
 
 <body>
-<div class='container'>
-    
-</div>
+    <div class='container col-md-12'>
+        <div class='row'>
+            <div class='col-md-12 p-0'>
+                <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+                    <a class='navbar-brand' href='#'>Direct Prod</a>
+                    <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarText'
+                        aria-controls='navbarText' aria-expanded='false' aria-label='Toggle navigation'>
+                        <span class='navbar-toggler-icon'></span>
+                    </button>
+                    <div class='collapse navbar-collapse' id='navbarText'>
+                        <ul class='navbar-nav mr-auto'>
+                            <li class='nav-item'>
+                                <a class='nav-link' href='#'>Accueil</a>
+                            </li>
+                            <li class='nav-item'>
+                                <a class='nav-link' href='#'>Profil</a>
+                            </li>
+                            <li class='nav-item'>
+                                <a class='nav-link' href='#'>Administrateur</a>
+                            </li>
+                        </ul>
+                        <span class='navbar-text'><a href='#' class='btn btn-outline-primary'>Inscription</a></span>
+                        <span class='navbar-text'><a href='#' class='btn btn-outline-primary'>Connexion</a></span>
+                        <span class='navbar-text'><a href='#' class='btn btn-outline-danger'>Déconnexion</a></span>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class='row justify-content-center'>
+            <div class='col-md-6'>
+                <form method="POST" action='#'>
+                    <div class="form-group">
+                        <label for="email" class="corps">Adresse email</label>
+                        <input type="email" class="form-control" name="email" id="email"
+                            placeholder="Entrez un email valide">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="corps">Mot de passe</label>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
+                    <div class="form-group">
+                        <small><a href='#'>Pas encore de compte ?</a></small>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="send">Connexion</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
