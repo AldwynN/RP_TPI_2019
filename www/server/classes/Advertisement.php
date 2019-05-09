@@ -1,7 +1,7 @@
 <?php
 
 /* Titre : Classe "Advertisement"
- * Date : Lundi, 13.05.2019
+ * Date : Jeudi, 09.05.2019
  * Auteurs : Romain Peretti
  * Version : 1.0
  * Description : Création de la classe "Advertisement" et initialisation des principaux champs de cette classe

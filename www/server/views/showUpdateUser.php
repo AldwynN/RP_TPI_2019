@@ -1,15 +1,15 @@
 <!--
-Titre : Page d'inscription
-Date : 8 mai 2019
+Titre : Page de modification de son profil
+Date : 9 mai 2019
 Auteur : Romain Peretti
 Version : 1.0
-Description : La vue de la page d'inscription contenant un formulaire
+Description : La vue de la page de modification de son profil contenant le formulaire rempli avec les données de la base
 -->
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Inscription</title>
+    <title>Modification de votre profil</title>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- Bootstrap CSS & JS -->
@@ -28,26 +28,22 @@ Description : La vue de la page d'inscription contenant un formulaire
                 <div class="media-body">
                     <form method="POST">
                         <div class="form-group">
-                            <label for="email">Adresse email</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Entrez un email valide">
+                            <label for="newPassword">Nouveau mot de passe</label>
+                            <input type="password" class="form-control" name="newPassword" id="newPassword">
                         </div>
                         <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" class="form-control" name="password" id="password">
-                        </div>
-                        <div class="form-group">
-                            <label for="repeatPassword">Confirmer le mot de passe</label>
-                            <input type="password" class="form-control" name="repeatPassword" id="repeatPassword">
+                            <label for="repeatNewPassword">Confirmer le mot de passe</label>
+                            <input type="password" class="form-control" name="repeatNewPassword" id="repeatNewPassword">
                         </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="canton">Canton</label>
-                                    <input type="text" class="form-control" name="canton" id="canton" placeholder="Vaud">
+                                    <input type="text" class="form-control" name="canton" id="canton">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="city">Ville</label>
-                                    <input type="text" class="form-control" name="city" id="city" placeholder="Lausanne">
+                                    <input type="text" class="form-control" name="city" id="city">
                                 </div>
                             </div>
                         </div>
@@ -55,11 +51,11 @@ Description : La vue de la page d'inscription contenant un formulaire
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="postCode">Code postal</label>
-                                    <input type="text" class="form-control" name="postCode" id="postCode" placeholder="1007">
+                                    <input type="text" class="form-control" name="postCode" id="postCode">
                                 </div>
                                 <div class="col-md-9">
                                     <label for="streetAndNumber">Rue et numéro</label>
-                                    <input type="text" class="form-control" name="streetAndNumber" id="streetAndNumber" placeholder="14 Rue Jean-Dujardin">
+                                    <input type="text" class="form-control" name="streetAndNumber" id="streetAndNumber">
                                 </div>
                             </div>
                         </div>
@@ -68,13 +64,14 @@ Description : La vue de la page d'inscription contenant un formulaire
                             <textarea name="description" class="form-control" id="description"></textarea>
                         </div>
                         <div class="form-group">
-                            <small><a href="../controllers/login.php">Déjà un compte ?</a></small>
+                            <label for="password">Entrez votre mot de passe actuel</label>
+                            <input type="password" class="form-control" name="password" id="password">
                         </div>
-                        <button type="submit" class="btn btn-primary" name="send">Inscription</button>
+                        <button type="submit" class="btn btn-primary" name="send">Modifier</button>
                     </form>
                 </div>
             </div>
-        </div>
+        </div>        
         <div class='row'>
             <?php include_once '../inc/footer.php'; ?>
         </div>

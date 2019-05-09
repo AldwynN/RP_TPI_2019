@@ -28,7 +28,7 @@ Description : La vue de la page de modification d'une annonce contenant le formu
                 <form method='POST'>
                     <div class="form-group">
                         <label for="title">Titre</label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Salade Romaine" value='<?php //Récupérer les infos ?>'>
+                        <input type="text" class="form-control" name="title" id="title" value='<?php //Récupérer les infos ?>'>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
@@ -46,6 +46,9 @@ Description : La vue de la page de modification d'une annonce contenant le formu
                     <button type="submit" class="btn btn-primary" name="send">Modifier</button>
                 </form>
             </div>
+        </div>
+        <div class='row'>
+            <?php include_once '../inc/footer.php'; ?>
         </div>
     </div>
 </body>

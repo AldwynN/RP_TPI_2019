@@ -46,6 +46,9 @@ Description : La vue de la page de création d'une annonce contenant le formulai
                 </form>
             </div>
         </div>
+        <div class='row'>
+            <?php include_once '../inc/footer.php'; ?>
+        </div>
     </div>
 </body>
 

@@ -1,7 +1,7 @@
 <?php
 
 /* Titre : Classe "Rating"
- * Date : Mardi, 14.05.2019
+ * Date : Jeudi, 09.05.2019
  * Auteurs : Romain Peretti
  * Version : 1.0
  * Description : Création de la classe "Rating" et initialisation des principaux champs de cette classe

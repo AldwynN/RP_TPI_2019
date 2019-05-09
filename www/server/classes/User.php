@@ -1,7 +1,7 @@
 <?php
 
 /* Titre : Classe "User"
- * Date : Lundi, 13.05.2019
+ * Date : Jeudi, 09.05.2019
  * Auteurs : Romain Peretti
  * Version : 1.0
  * Description : Création de la classe "User" et initialisation des principaux champs de cette classe
@@ -32,7 +32,7 @@ class User
         $this->streetAndNumber = $InStreetAndNumber;
         $this->description = $InDescription;
         $this->salt = $InSalt;
-        $this->rolesCode = $InRolesCode;
+        $this->roles_code = $InRolesCode;
     }
 
     /** @var string L'email de l'utilisateur */
@@ -59,7 +59,7 @@ class User
     /** @var string Le hash utilisé pour le mdp de l'utilisateur */
     public $salt;
 
-    /** @var int Code du roles de l'utilisateur */
-    public $rolesCode;
+    /** @var int Code du role de l'utilisateur */
+    public $roles_code;
 
 }

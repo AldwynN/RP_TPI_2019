@@ -106,6 +106,10 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
                 </form>
             </div>
         </div>
+        <div class='row'>
+            <?php include_once '../inc/footer.php'; ?>
+        </div>
+    </div>
 </body>
 
 </html>

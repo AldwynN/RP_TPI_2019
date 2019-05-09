@@ -41,6 +41,9 @@ Description : La vue de la page connexion contenant un formulaire
                 </form>
             </div>
         </div>
+        <div class='row'>
+            <?php include_once '../inc/footer.php'; ?>
+        </div>
     </div>
 </body>
 

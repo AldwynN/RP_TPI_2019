@@ -1,6 +1,6 @@
 <!--
-Titre : Page de suppression d'une annonce
-Date : 8 mai 2019
+Titre : Page de suppression d'un utilisateur
+Date : 9 mai 2019
 Auteur : Romain Peretti
 Version : 1.0
 Description : La vue de la page de suppression d'une annonce contenant un formulaire de validation
@@ -9,7 +9,7 @@ Description : La vue de la page de suppression d'une annonce contenant un formul
 <html>
 
 <head>
-    <title>Suppression d'une annonce</title>
+    <title>Suppression de votre compte</title>
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <!-- Bootstrap CSS & JS -->
@@ -27,7 +27,7 @@ Description : La vue de la page de suppression d'une annonce contenant un formul
             <div class='col-md-6'>
                 <form method='POST'>
                     <fieldset class='form-group'>
-                        <legend class='col-form-label'>Voulez-vous vraiment supprimer l'annonce ?</legend>
+                        <legend class='col-form-label'>Voulez-vous vraiment supprimer votre compte ?</legend>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="radio" id="radioYes" value="yes">
                             <label class="form-check-label" for="radioYes">Oui</label>

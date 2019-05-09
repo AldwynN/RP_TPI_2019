@@ -1,6 +1,6 @@
 <!--
 Titre : Barre de navigation
-Date : 8 mai 2019
+Date : 9 mai 2019
 Auteur : Romain Peretti
 Version : 1.0
 Description : Cette page permet l'affichage de la barre de navigation avec les possibilitées de se connecter, se déconnecter et s'inscrire qui apparaissent ou disparaissent suivant si on est connecté ou pas.
