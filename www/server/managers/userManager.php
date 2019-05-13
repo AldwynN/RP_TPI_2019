@@ -26,7 +26,7 @@ class UserManager
         $u = null;
 
         //Initialisation de la requête
-        $req = 'SELECT email, password, city, canton, postCode, streetAndNumber, description, salt, roles_code FROM user WHERE email = :e';
+        $req = 'SELECT email, password, city, canton, postCode, streetAndNumber, description, salt, roles_code FROM users WHERE email = :e';
         $statement = Database::prepare($req);
 
         try {
@@ -54,12 +54,12 @@ class UserManager
     public static function CreateUser($u)
     {
         //Vérification que l'email n'est pas déjà utilisé
-        if (UserExist($u->email)) {
+        if (UserManager::UserExist($u->email)) {
             return null;
         }
 
         //Initialisation de la requête
-        $req = 'INSERT INTO user (password, city, canton, postCode, streetAndNumber, description, salt, roles_code) VALUES (:pwd, :ci, :ca, :po, :st, :d, :sa, :r)';
+        $req = 'INSERT INTO users (email, password, city, canton, postCode, streetAndNumber, description, salt, roles_code) VALUES (:e, :pwd, :ci, :ca, :po, :st, :d, :sa, :r)';
         $statement = Database::prepare($req);
 
         //Création d'un hash
@@ -70,6 +70,7 @@ class UserManager
 
         try {
             $statement->execute(array(
+                ':e' => $u->email,
                 ':pwd' => $encryptedPassword,
                 ':ci' => $u->city,
                 ':ca' => $u->canton,
@@ -96,7 +97,7 @@ class UserManager
     public static function UpdateUser($u)
     {
         //Initialisation de la requête
-        $req = 'UPDATE user SET password = :pwd, city = :ci, canton = :ca, postCode = :po, streetAndNumber = :st, description = :d, salt = :s WHERE email = :e';
+        $req = 'UPDATE users SET password = :pwd, city = :ci, canton = :ca, postCode = :po, streetAndNumber = :st, description = :d, salt = :s WHERE email = :e';
         $statement = Database::prepare($req);
 
         //Création d'un nouveau hash
@@ -132,7 +133,7 @@ class UserManager
     public static function DeleteUser($email)
     {
         //Initialisation de la requête
-        $req = 'DELETE FROM user WHERE email = :e';
+        $req = 'DELETE FROM users WHERE email = :e';
         $statement = Database::prepare($req);
 
         try {
@@ -155,7 +156,7 @@ class UserManager
     public static function UserExist($email)
     {
         //Initialisation de la requête
-        $req = 'SELECT * FROM user WHERE email = :e';
+        $req = 'SELECT * FROM users WHERE email = :e';
         $statement = Database::prepare($req);
 
         try {
@@ -189,7 +190,7 @@ class UserManager
         }
 
         //Initialisation de la requête
-        $req = 'SELECT password, salt FROM user WHERE email = :e';
+        $req = 'SELECT password, salt FROM users WHERE email = :e';
         $statement = Database::prepare($req);
 
         try {

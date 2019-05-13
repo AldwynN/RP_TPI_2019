@@ -24,7 +24,7 @@ class PictureManager
     {
         $p = null;
 
-        $req = 'SELECT idPicture, picture, idAdvertisement WHERE idPicture = :id';
+        $req = 'SELECT idPicture, picture, idAdvertisement FROM pictures WHERE idPicture = :id';
         $statement = Database::prepare($req);
 
         try {
@@ -53,7 +53,7 @@ class PictureManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idPicture, picture, idAdvertisement WHERE idAdvertisement = :id';
+        $req = 'SELECT idPicture, picture, idAdvertisement FROM pictures WHERE idAdvertisement = :id';
         $statement = Database::prepare($req);
 
         try {
@@ -83,7 +83,7 @@ class PictureManager
     public static function CreatePicture($p)
     {
         //Initialisation de la requête
-        $req = 'INSERT INTO picture (picture, idAdvertisement) VALUES (:p, :id)';
+        $req = 'INSERT INTO pictures (picture, idAdvertisement) VALUES (:p, :id)';
         $statement = Database::prepare($req);
 
         try {
@@ -108,7 +108,7 @@ class PictureManager
     public static function DeletePicture($idPicture)
     { 
         //Initialisation de la requête
-        $req = 'DELETE FROM picture WHERE idPicture = :id';
+        $req = 'DELETE FROM pictures WHERE idPicture = :id';
         $statement = Database::prepare($req);
 
         try {

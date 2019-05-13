@@ -23,38 +23,36 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
         <div class='row'>
             <?php include_once '../inc/navbar.php'; ?>
         </div>
-        <div></div>
         <div class='row justify-content-center'>
-            <div class='media border rounded col-md-10'>
-                <div class='media-body'>
-                    <h4>Farine de blé</h4>
-                    <p class='text-justify'>Farine de blé composé à 95% ...</p>
-                    <input type='radio' id='bio' checked>
-                    <label for='bio'>Produit bio</label>
-                    <p>Vente au Joseph-Berthet 14, 1232 Genève</p>
-                    <p>Posté le 28 mars 2019 à 11h30</p>
-                    <div class='row justify-content-end'>
-                        <a class='btn btn-primary'>Détails</a>
-                        <a class='btn btn-warning'>Modifier</a>
-                        <a class='btn btn-danger'>Supprimer</a>
+            <div class='col-md-10'>
+                <form class='form-row'>
+                    <input type='text' class='form-control col-7' name='searchContent' placeholder='Mettez votre recherche ici'>
+                    <input type='submit' class='btn btn-primary col-3' value='Rechercher'>
+                    <a href='../controllers/createAd.php' class='btn btn-success col-2'>+</a>
+                </form>
+            </div>
+        </div>
+
+        <div class='row justify-content-center'>
+            <?php foreach ($ads as $ad) :
+                $u = UserManager::GetUserByEmail($ad->userEmail);
+                ?>
+                <div class='media border rounded col-md-10'>
+                    <div class='media-body'>
+                        <h4><?= $ad->title ?></h4>
+                        <p class='text-justify'><?= $ad->description ?></p>
+                        <input type='radio' id='bio' <?= ($ad->organic == 1 ? 'checked' : '') ?>>
+                        <label for='bio'>Produit bio</label>
+                        <p><?= 'Vente au ' . $u->streetAndNumber . ', ' . $u->postCode . ' ' . $u->canton ?></p>
+                        <p><?= 'Posté le ' . date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
+                        <div class='row justify-content-end'>
+                            <a class='btn btn-primary' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
+                            <a class='btn btn-warning' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
+                            <a class='btn btn-danger' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class='media border rounded col-md-10'>
-                <div class='media-body'>
-                    <h4>Farine de blé</h4>
-                    <p class='text-justify'>Farine de blé composé à 95% ...</p>
-                    <input type='radio' id='bio' checked>
-                    <label for='bio'>Produit bio</label>
-                    <p>Vente au Joseph-Berthet 14, 1232 Genève</p>
-                    <p>Posté le 28 mars 2019 à 11h30</p>
-                    <div class='row justify-content-end'>
-                        <a class='btn btn-primary'>Détails</a>
-                        <a class='btn btn-warning'>Modifier</a>
-                        <a class='btn btn-danger'>Supprimer</a>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
         <div class='row'>
             <?php include_once '../inc/footer.php'; ?>

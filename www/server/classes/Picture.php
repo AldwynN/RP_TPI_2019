@@ -7,6 +7,20 @@
  * Description : Création de la classe "Picture" et initialisation des principaux champs de cette classe
  */
 
+ /**
+ * @brief   Objet Picture
+ * @remark  Cet objet est utilisé comme conteneur en référence avec la table "pictures"
+ * 
+ *          Exemple d'utilisation 1
+ *          $p = new Picture();
+ *          $p->idPicture = 1;
+ *          $p->picture = BASE64(myImage.png);
+ *          $p->idAdvertisement = 1;
+ * 
+ * 
+ *          Exemple d'utilisation 2
+ *          $p = new Picture(1, BASE64(myImage.png), 1);
+ */
 class Picture
 {
     /**

@@ -23,7 +23,7 @@ class AdvertisementManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisement WHERE valid = 1';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = 1';
         $statement = Database::prepare($req);
 
         try {
@@ -54,7 +54,7 @@ class AdvertisementManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisement WHERE valid = 0';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = 0';
         $statement = Database::prepare($req);
 
         try {
@@ -87,7 +87,7 @@ class AdvertisementManager
         $a = null;
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisement WHERE idAdvertisement = :idAd';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE idAdvertisement = :idAd';
         $statement = Database::prepare($req);
 
         try {
@@ -111,12 +111,12 @@ class AdvertisementManager
      * @return array Un tableau contenant toutes les annonces de type "Advertisement".
      * 		   False Une erreur est survenue.
      */
-    public static function GetAdsByUserId($email)
+    public static function GetAdsByUserEmail($email)
     {
-        $a = null;
+        $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisement WHERE email = :e';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE email = :e';
         $statement = Database::prepare($req);
 
         try {
@@ -126,12 +126,14 @@ class AdvertisementManager
             return false;
         }
 
-        //On récupère le premier élément
-        if ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+        // Tant qu'il y a des entrées
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
             $a = new Advertisement($row['idAdvertisement'], $row['title'], $row['description'], $row['organic'], $row['valid'], $row['creationDate'], $row['email']);
+
+            array_push($arr, $a);
         }
 
-        return $a;
+        return $arr;
     }
 
     /**
@@ -143,7 +145,7 @@ class AdvertisementManager
     public static function CreateAd($a)
     {
         //Initialisation de la requête
-        $req = 'INSERT INTO advertisement (title, description, organic, valid, email) VALUES (:t, :d, :o, :v, :e)';
+        $req = 'INSERT INTO advertisements (title, description, organic, valid, email) VALUES (:t, :d, :o, 0, :e)';
         $statement = Database::prepare($req);
 
         try {
@@ -151,8 +153,7 @@ class AdvertisementManager
                 ':t' => $a->title,
                 ':d' => $a->description,
                 ':o' => $a->organic,
-                ':v' => $a->valid,
-                ':e' => $a->email
+                ':e' => $a->userEmail
             ));
         } catch (PDOException $e) {
             echo 'Problème de lecture de la base de données: ' . $e->getMessage();
@@ -171,7 +172,7 @@ class AdvertisementManager
     public static function UpdateAd($a)
     {
         //Initialisation de la requête
-        $req = 'UPDATE advertisement SET title = :t, description = :d, organic = :o';
+        $req = 'UPDATE advertisements SET title = :t, description = :d, organic = :o';
         $statement = Database::prepare($req);
 
         try {
@@ -197,7 +198,7 @@ class AdvertisementManager
     public static function UpdateAdToValid($idAd)
     {
         //Initialisation de la requête
-        $req = 'UPDATE advertisement SET valid = :v WHERE idAdvertisement = :idAd';
+        $req = 'UPDATE advertisements SET valid = :v WHERE idAdvertisement = :idAd';
         $statement = Database::prepare($req);
 
         try {
@@ -220,9 +221,9 @@ class AdvertisementManager
      * 				   False Une erreur est survenue.
      */
     public static function DeleteAd($idAd)
-    { 
+    {
         //Initialisation de la requête
-        $req = 'DELETE FROM advertisement WHERE idAdvertisement = :idAd';
+        $req = 'DELETE FROM advertisements WHERE idAdvertisement = :idAd';
         $statement = Database::prepare($req);
 
         try {

@@ -24,7 +24,7 @@ class RatingManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT email, idAdvertisement, rating, comment, postDate WHERE idAdvertisement = :idAd';
+        $req = 'SELECT email, idAdvertisement, rating, comment, postDate FROM rates WHERE idAdvertisement = :idAd';
         $statement = Database::prepare($req);
 
         try {
@@ -56,7 +56,7 @@ class RatingManager
         $score = 0;
 
         //Initialisation de la requête
-        $req = 'SELECT AVG(rating) AS score FROM rate WHERE idAdvertisement = :idAd';
+        $req = 'SELECT AVG(rating) AS score FROM rates WHERE idAdvertisement = :idAd';
         $statement = Database::prepare($req);
 
         try {
@@ -82,12 +82,12 @@ class RatingManager
     public static function CreateRating($r)
     {
         //Initialisation de la requête
-        $req = 'INSERT INTO rate (email, idAdvertisement, rating, comment) VALUES (:e, :idAd, :r, :c)';
+        $req = 'INSERT INTO rates (email, idAdvertisement, rating, comment) VALUES (:e, :idAd, :r, :c)';
         $statement = Database::prepare($req);
 
         try {
             $statement->execute(array(
-                ':e' => $r->email,
+                ':e' => $r->userEmail,
                 ':idAd' => $r->idAdvertisement,
                 ':r' => $r->rating,
                 ':c' => $r->comment

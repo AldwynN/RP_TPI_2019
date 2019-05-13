@@ -1,20 +1,21 @@
 <?php
 session_start();
 
+
+$_SESSION['email'] = 'romain.prtt@eduge.ch';
 /*
-$_SESSION['idUser'] = 1;
 $_SESSION['name'] = "Romain Peretti";
 $_SESSION['connected'] = false;
 */
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DirectProd/server/database/database.php';
+require_once '../database/database.php';
 
-require_once 'constante.php';
+require_once '../classes/Advertisement.php';
+require_once '../classes/User.php';
+require_once '../classes/Rating.php';
+require_once '../classes/Picture.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DirectProd/server/class/Advertisement.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DirectProd/server/class/User.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DirectProd/server/class/Rating.php';
-
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DirectProd/server/manager/advertisementManager.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DirectProd/server/manager/userManager.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/DirectProd/server/manager/ratingManager.php';
+require_once '../managers/advertisementManager.php';
+require_once '../managers/userManager.php';
+require_once '../managers/ratingManager.php';
+require_once '../managers/pictureManager.php';

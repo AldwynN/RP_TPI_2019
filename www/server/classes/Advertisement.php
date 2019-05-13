@@ -7,21 +7,39 @@
  * Description : Création de la classe "Advertisement" et initialisation des principaux champs de cette classe
  */
 
+/**
+ * @brief   Objet Advertisement
+ * @remark  Cet objet est utilisé comme conteneur en référence avec la table "advertisements"
+ * 
+ *          Exemple d'utilisation 1
+ *          $a = new Advertisement();
+ *          $a->idAdvertisement = 1;
+ *          $a->title = "Farine de blé";
+ *          $a->description = "Farine de blé complet";
+ *          $a->organic = true;
+ *          $a->valid = true;
+ *          $a->creationDate = "2019-05-13 10:00:00";
+ *          $a->userEmail = "romain.prtt@eduge.ch";
+ * 
+ * 
+ *          Exemple d'utilisation 2
+ *          $a = new Advertisement(1, "Farine de blé", "Farine de blé complet", true, true, "2019-05-13 10:00:00", "romain.prtt@eduge.ch");
+ */
 class Advertisement
 {
 
     /**
      * @brief	Le Constructor appelé au moment de la création de l'objet. Ie. new Advertisement();
-     * @param InIdAdvertisement		L'id de l'annonce. Defaut ""
+     * @param InIdAdvertisement		L'id de l'annonce. Defaut null
      * @param InTitle	    Le Titre de l'annonce. Defaut ""
      * @param InDescription	    La description de l'annonce. Defaut ""
      * @param InOrganic	    Un boolean définissant si l'annonce est organique ou non. Defaut ""
      * @param InValid	    Un boolean définissant si l'annonce est validé par l'admin. Defaut ""
-     * @param InCreationDate    La date de création de l'annonce. Defaut ""
+     * @param InCreationDate    La date de création de l'annonce. Defaut null
      * @param InUserEmail	    L'email de l'utilisateur auquel l'annonce est assigné. Defaut ""
 	  */
-    public function __construct($InIdAdvertisement = "", $InTitle = "", $InDescription = "", $InOrganic = "", $InValid = "", $InCreationDate = "", $InUserEmail = "")
-    { 
+    public function __construct($InIdAdvertisement = null, $InTitle = "", $InDescription = "", $InOrganic = "", $InValid = "", $InCreationDate = null, $InUserEmail = "")
+    {
         $this->idAdvertisement = $InIdAdvertisement;
         $this->title = $InTitle;
         $this->description = $InDescription;

@@ -7,6 +7,22 @@
  * Description : Création de la classe "Rating" et initialisation des principaux champs de cette classe
  */
 
+/**
+ * @brief   Objet Rating
+ * @remark  Cet objet est utilisé comme conteneur en référence avec la table "rates"
+ * 
+ *          Exemple d'utilisation 1
+ *          $r = new Rating();
+ *          $r->rating = 4;
+ *          $r->comment = "Ce blé est vraiment idéal pour faire du pain";
+ *          $r->postDate = "2019-05-13 10:00:00";
+ *          $r->userEmail = "romain.prtt@eduge.ch";
+ *          $r->idAdvertisement = 1;
+ * 
+ * 
+ *          Exemple d'utilisation 2
+ *          $r = new Rating(4, "Ce blé est vraiment idéal pour faire du pain", "2019-05-13 10:00:00", "romain.prtt@eduge.ch", 1);
+ */
 class Rating
 {
     /**

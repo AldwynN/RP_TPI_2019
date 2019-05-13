@@ -7,6 +7,26 @@
  * Description : Création de la classe "User" et initialisation des principaux champs de cette classe
  */
 
+/**
+ * @brief   Objet User
+ * @remark  Cet objet est utilisé comme conteneur en référence avec la table "users"
+ * 
+ *          Exemple d'utilisation 1
+ *          $u = new User();
+ *          $u->email = "romain.prtt@eduge.ch";
+ *          $u->password = SHA1("1234");
+ *          $u->city = "Genève";
+ *          $u->canton = "Genève";
+ *          $u->postCode = "1232";
+ *          $u->streetAndNumber = "Joseph-Berthet 14";
+ *          $u->description = "J'aime la photographie";
+ *          $u->salt = "aocnNfNfgoitrosOAInrERXccpvw$w";
+ *          $u->roles_code = 1;
+ * 
+ * 
+ *          Exemple d'utilisation 2
+ *          $u = new User("romain.prtt@eduge.ch", SHA1("1234"), "Genève", "Genève", "1232", "Joseph-Berthet 14", "J'aime la photographie", "aocnNfNfgoitrosOAInrERXccpvw$w", 1);
+ */
 class User
 {
 
@@ -61,5 +81,4 @@ class User
 
     /** @var int Code du role de l'utilisateur */
     public $roles_code;
-
 }
