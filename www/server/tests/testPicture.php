@@ -23,7 +23,7 @@ if ($result === false) {
     echo 'Problème lors de la création';
 }
 if ($result) {
-    echo 'Création d\'une évalution réussi';
+    echo 'Création d\'une image réussi';
 }
 
 /**
@@ -57,10 +57,23 @@ if ($results) {
  */
 echo '<h3>Test 4 - DeletePicture()</h3>';
 
-$result = PictureManager::DeletePicture($idAd);
+$result = PictureManager::DeletePicture(1);
 if ($result === false) {
     echo 'Problème lors de la suppression';
 }
 if ($result) {
-    echo 'Suppression d\'une évalution réussi';
+    echo 'Suppression d\'une image réussi';
+}
+
+/**
+ * Test 5 - DeletePicturesOfAnAd()
+ */
+echo '<h3>Test 5 - DeletePicturesOfAnAd()</h3>';
+
+$result = PictureManager::DeletePicturesOfAnAd($idAd);
+if ($result === false) {
+    echo 'Problème lors de la suppression';
+}
+if ($result) {
+    echo 'Suppression des images réussi';
 }

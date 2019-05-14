@@ -34,11 +34,11 @@ class Advertisement
      * @param InTitle	    Le Titre de l'annonce. Defaut ""
      * @param InDescription	    La description de l'annonce. Defaut ""
      * @param InOrganic	    Un boolean définissant si l'annonce est organique ou non. Defaut ""
-     * @param InValid	    Un boolean définissant si l'annonce est validé par l'admin. Defaut ""
+     * @param InValid	    Un boolean définissant si l'annonce est validé par l'admin. Defaut null
      * @param InCreationDate    La date de création de l'annonce. Defaut null
      * @param InUserEmail	    L'email de l'utilisateur auquel l'annonce est assigné. Defaut ""
 	  */
-    public function __construct($InIdAdvertisement = null, $InTitle = "", $InDescription = "", $InOrganic = "", $InValid = "", $InCreationDate = null, $InUserEmail = "")
+    public function __construct($InIdAdvertisement = null, $InTitle = "", $InDescription = "", $InOrganic = "", $InValid = null, $InCreationDate = null, $InUserEmail = "")
     {
         $this->idAdvertisement = $InIdAdvertisement;
         $this->title = $InTitle;

@@ -25,7 +25,7 @@ Description : La vue de la page de création d'une annonce contenant le formulai
         </div>
         <div class='row justify-content-center'>
             <div class='col-md-6'>
-                <form method='POST'>
+                <form method='POST' enctype='multipart/form-data'>
                     <div class="form-group">
                         <label for="title">Titre</label>
                         <input type="text" class="form-control" name="title" id="title" placeholder="Salade Romaine">
@@ -40,7 +40,7 @@ Description : La vue de la page de création d'une annonce contenant le formulai
                     </div>
                     <div class="form-group">
                         <label for="file">Image(s) du produit</label>
-                        <input type="file" class="form-control-file" id="file">
+                        <input type="file" class="form-control-file" id="file" name='pictures[]' accept='image/jpeg, image/png, image/jpg' multiple> 
                     </div>
                     <button type="submit" class="btn btn-primary" name="send">Créer</button>
                 </form>

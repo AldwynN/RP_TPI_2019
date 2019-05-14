@@ -14,12 +14,13 @@ $idAd = filter_input(INPUT_GET, 'idAd', FILTER_SANITIZE_STRING);
 $ad = AdvertisementManager::GetAdById($idAd);
 $u = UserManager::GetUserByEmail($ad->userEmail);
 $rates = RatingManager::GetRatingsOfAnAd($idAd);
+$pics = PictureManager::GetPicturesByAdId($idAd);
 
 if (isset($_POST['send'])) {
     $comment = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
     $rating = filter_input(INPUT_POST, 'grade', FILTER_SANITIZE_STRING);
 
-    $r = new Rating($_SESSION['email'], $ad->idAdvertisement, $rating, $comment, null);
+    $r = new Rating(null, $rating, $comment, null, $_SESSION['email'], $ad->idAdvertisement);
     $result = RatingManager::CreateRating($r);
 
     if ($result === false) {

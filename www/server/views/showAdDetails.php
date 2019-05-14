@@ -34,7 +34,10 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
                     <p><?= 'Vente au ' . $u->streetAndNumber . ', ' . $u->postCode . ' ' . $u->canton ?></p>
                     <p><?= 'Posté le ' . date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
                     <p><?= 'Annonceur : ' . $ad->userEmail ?></p>
-                    <?php if ($_SESSION['email'] == $ad->userEmail) : ?>
+                    <?php foreach ($pics as $p) : ?>
+                        <img src='<?= $p->picture ?>' style='max-width: 125px; max-height: 125px;'>
+                    <?php endforeach; ?>
+                    <?php if (isset($_SESSION['email']) && $_SESSION['email'] == $ad->userEmail) : ?>
                         <div class='row justify-content-end'>
                             <a class='btn btn-warning' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
                             <a class='btn btn-danger' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>

@@ -23,7 +23,7 @@ class AdvertisementManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = 1';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = 1 ORDER BY creationDate DESC';
         $statement = Database::prepare($req);
 
         try {
@@ -149,18 +149,20 @@ class AdvertisementManager
         $statement = Database::prepare($req);
 
         try {
-            $statement->execute(array(
+            if ($statement->execute(array(
                 ':t' => $a->title,
                 ':d' => $a->description,
                 ':o' => $a->organic,
                 ':e' => $a->userEmail
-            ));
+            ))) {
+                if (PictureManager::CreatePicture(Database::lastInsertId())) {
+                    return true;
+                }
+            }
         } catch (PDOException $e) {
             echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
-
-        return true;
     }
 
     /**
@@ -222,9 +224,16 @@ class AdvertisementManager
      */
     public static function DeleteAd($idAd)
     {
+
         //Initialisation de la requête
         $req = 'DELETE FROM advertisements WHERE idAdvertisement = :idAd';
         $statement = Database::prepare($req);
+
+        // Suppression des images liées avec cette annonce
+        PictureManager::DeletePicturesOfAnAd($idAd);
+
+        // Suppression des évalutations liées avec cette annonce
+        RatingManager::DeleteRatingsOfAnAd($idAd);
 
         try {
             $statement->execute(array(':idAd' => $idAd));
@@ -234,5 +243,20 @@ class AdvertisementManager
         }
 
         return true;
+    }
+
+    /**
+     * @brief Suppression de toutes les annonces d'un utilisateur
+     * @param string email L'email de l'utilisateur.
+     * @return boolean True  Ok.
+     * 				   False Une erreur est survenue.
+     */
+    public static function DeleteAdsOfUser($email)
+    {
+        $ads = AdvertisementManager::GetAdsByUserEmail($email);
+
+        foreach ($ads as $ad) {
+            AdvertisementManager::DeleteAd($ad->idAdvertisement);
+        }
     }
 }

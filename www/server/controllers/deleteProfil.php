@@ -1,23 +1,23 @@
 <?php
 /*
-Titre : Controlleur de la suppression d'une annonce
+Titre : Contrôleur de la suppression du profil
 Date : Mardi, 14 mai 2019
 Auteur : Romain Peretti
 Version : 1.0
-Description : Cette page inclut la recherche d'annonces et la vue
+Description : Cette page inclut la vue.
 */
 
 require_once '../inc/inc.all.php';
 
-$idAd = filter_input(INPUT_GET, 'idAd', FILTER_SANITIZE_NUMBER_INT);
+$email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_STRING);
 
-$a = AdvertisementManager::GetAdById($idAd);
+$u = UserManager::GetUserByEmail($email);
 
 if (isset($_POST['send'])) {
     $radio = filter_input(INPUT_POST, 'radio');
 
     if (isset($radio) && $radio == 'yes') {
-        $result = AdvertisementManager::DeleteAd($idAd);
+        $result = UserManager::DeleteUser($idAd);
         if ($result === false) {
             echo '<div class="alert alert-danger mb-0" role="alert">Message d\'erreur : "Erreur lors de la suppression"</div>';
         }
@@ -28,4 +28,4 @@ if (isset($_POST['send'])) {
     }
 }
 
-include_once '../views/showDeleteAd.php';
+include_once '../views/showDeleteProfil.php';

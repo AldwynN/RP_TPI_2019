@@ -13,6 +13,7 @@
  * 
  *          Exemple d'utilisation 1
  *          $r = new Rating();
+ *          $r->idRate = null;
  *          $r->rating = 4;
  *          $r->comment = "Ce blé est vraiment idéal pour faire du pain";
  *          $r->postDate = "2019-05-13 10:00:00";
@@ -21,20 +22,22 @@
  * 
  * 
  *          Exemple d'utilisation 2
- *          $r = new Rating(4, "Ce blé est vraiment idéal pour faire du pain", "2019-05-13 10:00:00", "romain.prtt@eduge.ch", 1);
+ *          $r = new Rating(null, 4, "Ce blé est vraiment idéal pour faire du pain", "2019-05-13 10:00:00", "romain.prtt@eduge.ch", 1);
  */
 class Rating
 {
     /**
      * @brief	Le Constructor appelé au moment de la création de l'objet. Ie. new Rating(); 
-     * @param InUserEmail   L'email de l'utilisateur ayant mit un commentaire. Defaut ""
-     * @param InIdAdvertisement	    L'id de l'annonce auquel le commentaire est assigné. Defaut ""
+     * @param InIdRate  L'id de l'évalutation. Default null
      * @param InRating		La note donné par l'utilisateur. Defaut ""
      * @param InComment     Le commentaire laisser sous le commentaire. Defaut ""
      * @param InPostDate    La date de création du commentaire. Defaut ""
+     * @param InUserEmail   L'email de l'utilisateur ayant mit un commentaire. Defaut ""
+     * @param InIdAdvertisement	    L'id de l'annonce auquel le commentaire est assigné. Defaut ""
 	  */
-    public function __construct($InUserEmail = "", $InIdAdvertisement = "", $InRating = "", $InComment = "", $InPostDate = "")
+    public function __construct($InIdRate = null, $InRating = "", $InComment = "", $InPostDate = "", $InUserEmail = "", $InIdAdvertisement = "")
     {
+        $this->idRate = $InIdRate;
         $this->rating = $InRating;
         $this->comment = $InComment;
         $this->postDate = $InPostDate;
@@ -42,11 +45,8 @@ class Rating
         $this->idAdvertisement = $InIdAdvertisement;
     }
 
-    /** @var string L'email de l'utilisateur */
-    public $userEmail;
-
-    /** @var int L'id de l'annonce */
-    public $idAdvertisement;
+    /** @var int L'id de l'évaluation */
+    public $idRate;
 
     /** @var int La note donné par l'utilisateur */
     public $rating;
@@ -56,4 +56,10 @@ class Rating
 
     /** @var int La date de création du commentaire */
     public $postDate;
+
+    /** @var string L'email de l'utilisateur */
+    public $userEmail;
+
+    /** @var int L'id de l'annonce */
+    public $idAdvertisement;
 }

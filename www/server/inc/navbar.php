@@ -16,16 +16,23 @@ Description : Cette page permet l'affichage de la barre de navigation avec les p
                 <li class='nav-item'>
                     <a class='nav-link' href='../controllers/home.php'>Accueil</a>
                 </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='../controllers/profil.php?userEmail=<?= $_SESSION['email'] ?>'>Profil</a>
-                </li>
-                <li class='nav-item'>
-                    <a class='nav-link' href='../controllers/admin.php'>Administrateur</a>
-                </li>
+                <?php if (isset($_SESSION['email'])) : ?>
+                    <li class='nav-item'>
+                        <a class='nav-link' href='../controllers/profil.php?email=<?= $_SESSION['email'] ?>'>Profil</a>
+                    </li>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == '2') : ?>
+                    <li class='nav-item'>
+                        <a class='nav-link' href='../controllers/admin.php'>Administrateur</a>
+                    </li>
+                <?php endif; ?>
             </ul>
-            <span class='navbar-text'><a href='../controllers/signIn.php' class='btn btn-outline-primary'>Inscription</a></span>
-            <span class='navbar-text'><a href='../controllers/login.php' class='btn btn-outline-primary'>Connexion</a></span>
-            <span class='navbar-text'><a href='../controllers/logout.php' class='btn btn-outline-danger'>Déconnexion</a></span>
+            <?php if (isset($_SESSION['email'])) : ?>
+                <span class='navbar-text'><a href='../controllers/logout.php' class='btn btn-outline-danger'>Déconnexion</a></span>
+            <?php else : ?>
+                <span class='navbar-text'><a href='../controllers/signIn.php' class='btn btn-outline-primary'>Inscription</a></span>
+                <span class='navbar-text'><a href='../controllers/login.php' class='btn btn-outline-primary'>Connexion</a></span>
+            <?php endif; ?>
         </div>
     </nav>
 </div>

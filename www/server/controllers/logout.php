@@ -1,4 +1,9 @@
 <?php
+/*
+Auteur : php.net
+Lien : https://www.php.net/manual/fr/function.session-destroy.php
+*/
+
 // Initialisation de la session.
 // Si vous utilisez un autre nom
 // session_name("autrenom")
@@ -21,4 +26,4 @@ if (ini_get("session.use_cookies")) {
 // Finalement, on détruit la session.
 session_destroy();
 
-header("Location: index.php");
+header("Location: home.php");

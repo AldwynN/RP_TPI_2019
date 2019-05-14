@@ -39,11 +39,11 @@ Description : La vue de la page de modification de son profil contenant le formu
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="canton">Canton</label>
-                                    <input type="text" class="form-control" name="canton" id="canton">
+                                    <input type="text" class="form-control" name="canton" id="canton" required value='<?= $u->canton ?>'>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="city">Ville</label>
-                                    <input type="text" class="form-control" name="city" id="city">
+                                    <input type="text" class="form-control" name="city" id="city" required value='<?= $u->city ?>'>
                                 </div>
                             </div>
                         </div>
@@ -51,27 +51,27 @@ Description : La vue de la page de modification de son profil contenant le formu
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="postCode">Code postal</label>
-                                    <input type="text" class="form-control" name="postCode" id="postCode">
+                                    <input type="text" class="form-control" name="postCode" id="postCode" required value='<?= $u->postCode ?>'>
                                 </div>
                                 <div class="col-md-9">
                                     <label for="streetAndNumber">Rue et numéro</label>
-                                    <input type="text" class="form-control" name="streetAndNumber" id="streetAndNumber">
+                                    <input type="text" class="form-control" name="streetAndNumber" id="streetAndNumber" required value='<?= $u->streetAndNumber ?>'>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" class="form-control" id="description"></textarea>
+                            <textarea name="description" class="form-control" id="description"><?= $u->description ?></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="password">Entrez votre mot de passe actuel</label>
-                            <input type="password" class="form-control" name="password" id="password">
+                            <label for="password">Entrez votre mot de passe actuel pour appliquer les modifications</label>
+                            <input type="password" class="form-control" name="password" id="password" required> 
                         </div>
                         <button type="submit" class="btn btn-primary" name="send">Modifier</button>
                     </form>
                 </div>
             </div>
-        </div>        
+        </div>
         <div class='row'>
             <?php include_once '../inc/footer.php'; ?>
         </div>

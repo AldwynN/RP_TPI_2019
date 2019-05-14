@@ -29,7 +29,7 @@ if (isset($_POST['send'])) {
         echo '<div class="alert alert-danger mb-0" role="alert">Cet email est déjà utilisé</div>';
     }
     if ($result) {
-        echo '<div class="alert alert-info" role="alert">Compte créé, en attente de redirection</div>';
+        echo '<div class="alert alert-success mb-0" role="alert">Compte créé, en attente de redirection</div>';
         echo '<meta http-equiv="refresh" content="2;URL=login.php">';
     }
 }

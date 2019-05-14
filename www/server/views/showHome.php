@@ -28,7 +28,9 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                 <form class='form-row'>
                     <input type='text' class='form-control col-7' name='searchContent' placeholder='Mettez votre recherche ici'>
                     <input type='submit' class='btn btn-primary col-3' value='Rechercher'>
-                    <a href='../controllers/createAd.php' class='btn btn-success col-2'>+</a>
+                    <?php if (isset($_SESSION['email'])) : ?>
+                        <a href='../controllers/createAd.php' class='btn btn-success col-2'>+</a>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>
@@ -47,8 +49,10 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                         <p><?= 'Posté le ' . date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
                         <div class='row justify-content-end'>
                             <a class='btn btn-primary' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
-                            <a class='btn btn-warning' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
-                            <a class='btn btn-danger' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                            <?php if (isset($_SESSION['email']) && $ad->userEmail == $_SESSION['email']) : ?>
+                                <a class='btn btn-warning' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
+                                <a class='btn btn-danger' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

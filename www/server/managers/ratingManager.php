@@ -24,7 +24,7 @@ class RatingManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT email, idAdvertisement, rating, comment, postDate FROM rates WHERE idAdvertisement = :idAd';
+        $req = 'SELECT idRate, rating, comment, postDate, email, idAdvertisement FROM rates WHERE idAdvertisement = :idAd';
         $statement = Database::prepare($req);
 
         try {
@@ -37,7 +37,7 @@ class RatingManager
         //Tant qu'il y a des entrées
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             //On crée une variable de la classe Rating
-            $r = new Rating($row['email'], $row['idAdvertisement'], $row['rating'], $row['comment'], $row['postDate']);
+            $r = new Rating(null, $row['rating'], $row['comment'], $row['postDate'], $row['email'], $row['idAdvertisement']);
             //Et on l'ajoute dans le tableau qu'on retourne à la fin
             array_push($arr, $r);
         }
@@ -82,7 +82,7 @@ class RatingManager
     public static function CreateRating($r)
     {
         //Initialisation de la requête
-        $req = 'INSERT INTO rates (email, idAdvertisement, rating, comment) VALUES (:e, :idAd, :r, :c)';
+        $req = 'INSERT INTO rates (rating, comment, email, idAdvertisement) VALUES (:r, :c, :e, :idAd)';
         $statement = Database::prepare($req);
 
         try {
@@ -92,6 +92,43 @@ class RatingManager
                 ':r' => $r->rating,
                 ':c' => $r->comment
             ));
+        } catch (PDOException $e) {
+            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @brief Suppression de toutes les évalutions d'une annonce
+     * @param int idAd L'id de l'annonce.
+     * @return boolean True Ok.
+     * 		           False Une erreur est survenue.
+     */
+    public static function DeleteRatingsOfAnAd($idAd)
+    {
+        //Initialisation de la requête
+        $req = 'DELETE FROM rates WHERE idAdvertisement = :id';
+        $statement = Database::prepare($req);
+        $statement->execute(array(':id' => $idAd));
+        return true;
+    }
+
+    /**
+     * @brief Suppression de toutes les évalutions d'un utilisateur
+     * @param string email L'email de l'utilisateur.
+     * @return boolean True Ok.
+     * 		           False Une erreur est survenue.
+     */
+    public static function DeleteRatingsOfUser($email)
+    {
+        //Initialisation de la requête
+        $req = 'DELETE FROM rates WHERE email = :e';
+        $statement = Database::prepare($req);
+
+        try {
+            $statement->execute(array(':e' => $email));
         } catch (PDOException $e) {
             echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;

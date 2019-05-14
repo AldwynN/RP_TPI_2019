@@ -27,7 +27,7 @@ Description : La vue de la page de suppression d'une annonce contenant un formul
             <div class='col-md-6'>
                 <form method='POST'>
                     <fieldset class='form-group'>
-                        <legend class='col-form-label'>Voulez-vous vraiment supprimer votre compte ?</legend>
+                        <legend class='col-form-label'>Voulez-vous vraiment supprimer votre compte (<?= $u->email ?>) ?</legend>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="radio" id="radioYes" value="yes">
                             <label class="form-check-label" for="radioYes">Oui</label>

@@ -76,37 +76,64 @@ class PictureManager
 
     /**
      * @brief Ajout d'une image
-     * @param [Picture] L'objet "Picture".
+     * @param int idAd L'id de l'annonce auquel est lié l'image.
      * @return boolean True Ok.
      * 		           False Une erreur est survenue.
      */
-    public static function CreatePicture($p)
+    public static function CreatePicture($idAd)
     {
-        //Initialisation de la requête
-        $req = 'INSERT INTO pictures (picture, idAdvertisement) VALUES (:p, :id)';
-        $statement = Database::prepare($req);
-
-        try {
-            $statement->execute(array(
-                ':t' => $p->picture,
-                ':d' => $p->idAdvertisement
-            ));
-        } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
+        //Suppression de toutes les anciennes images pour les réinsérer après
+        if (!PictureManager::DeletePicturesOfAnAd($idAd)) {
             return false;
         }
 
-        return true;
+        if($_FILES['pictures']['error'][0] == 4){
+            return true;
+        }
+
+        for ($i = 1; $i <= count($_FILES['pictures']['name']); $i++) {
+
+            // Index pour la superglobal $_FILES car on commence avec $i = 1
+            $index = $i - 1;
+
+            // vérification que le transfert c'est bien déroulé
+            if (!isset($_FILES['pictures']['name'][$index]) || !is_uploaded_file($_FILES['pictures']['tmp_name'][$index])) {
+                echo ('Probleme de transfert');
+                exit;
+            }
+            // Récupération du fichier temporaire
+            $data = file_get_contents($_FILES['pictures']['tmp_name'][$index]);
+            //Récupération du MIME
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $mime = $finfo->file($_FILES['pictures']['tmp_name'][$index]);
+            //Création de la chaine en base 64
+            $src = 'data:' . $mime . ';base64,' . base64_encode($data);
+
+            //Initialisation de la requête
+            $req = 'INSERT INTO pictures(picture, idAdvertisement) VALUES (:p, :id)';
+            $statement = Database::prepare($req);
+
+            try {
+                if ($statement->execute(array(':p' => $src, 'id' => $idAd))) {
+                    if (count($_FILES['pictures']['name']) == $i) {
+                        return true;
+                    }
+                }
+            } catch (PDOException $e) {
+                echo 'Problème de lecture de la base de données: ' . $e->getMessage();
+                return false;
+            }
+        }
     }
 
     /**
      * @brief Suppression d'une image
-     * @param int idPicture L'id de l'image à supprimer.
+     * @param int idPictu re L'id de l'image à supprimer.
      * @return boolean True Ok.
-     * 		           False Une erreur est survenue.
+     *                    False Une erreur est survenue.
      */
     public static function DeletePicture($idPicture)
-    { 
+    {
         //Initialisation de la requête
         $req = 'DELETE FROM pictures WHERE idPicture = :id';
         $statement = Database::prepare($req);
@@ -118,6 +145,21 @@ class PictureManager
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * @brief Suppression des images lié à une annonce
+     * @param int idAd L'id de l'annonce.
+     * @return boolean True Ok.
+     * 		           False Une erreur est survenue.
+     */
+    public static function DeletePicturesOfAnAd($idAd)
+    {
+        //Initialisation de la requête
+        $req = 'DELETE FROM pictures WHERE idAdvertisement = :id';
+        $statement = Database::prepare($req);
+        $statement->execute(array(':id' => $idAd));
         return true;
     }
 }

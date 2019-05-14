@@ -132,6 +132,9 @@ class UserManager
      */
     public static function DeleteUser($email)
     {
+        // Suppression des annonces et des évalutions de l'utilisateur
+        AdvertisementManager::DeleteAdsOfUser($email);
+
         //Initialisation de la requête
         $req = 'DELETE FROM users WHERE email = :e';
         $statement = Database::prepare($req);
@@ -185,7 +188,7 @@ class UserManager
     public static function Login($email, $password)
     {
         // Vérification que l'email est utilisé
-        if (!UserExist($email)) {
+        if (!UserManager::UserExist($email)) {
             return null;
         }
 
