@@ -9,4 +9,6 @@ Description : Cette page inclut la vue
 
 require_once '../inc/inc.all.php';
 
+$pageName = 'Connexion';
+
 include_once '../views/showLogin.php';

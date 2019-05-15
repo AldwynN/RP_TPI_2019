@@ -9,13 +9,7 @@ Description : La vue de la page d'inscription contenant un formulaire
 <html>
 
 <head>
-    <title>Inscription</title>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- Bootstrap CSS & JS -->
-    <link href='../../css/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
-    <script src='../../css/bootstrap/js/bootstrap.min.js' type='text/javascript'></script>
+    <?php include_once '../inc/head.php'; ?>
 </head>
 
 <body>

@@ -18,4 +18,6 @@ if (isset($_POST['send'])) {
     // Code
 }
 
+$pageName = 'Modification d\'une annonce';
+
 include_once '../views/showUpdateAd.php';

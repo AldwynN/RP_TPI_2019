@@ -30,8 +30,8 @@ Description : Cette page permet l'affichage de la barre de navigation avec les p
             <?php if (isset($_SESSION['email'])) : ?>
                 <span class='navbar-text'><a href='../controllers/logout.php' class='btn btn-outline-danger'>Déconnexion</a></span>
             <?php else : ?>
-                <span class='navbar-text'><a href='../controllers/signIn.php' class='btn btn-outline-primary'>Inscription</a></span>
-                <span class='navbar-text'><a href='../controllers/login.php' class='btn btn-outline-primary'>Connexion</a></span>
+                <span class='navbar-text'><a href='../controllers/signIn.php' class='btn btn-outline-primary myBtn'>Inscription</a></span>
+                <span class='navbar-text'><a href='../controllers/login.php' class='btn btn-outline-primary myBtn'>Connexion</a></span>
             <?php endif; ?>
         </div>
     </nav>

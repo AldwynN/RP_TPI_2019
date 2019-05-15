@@ -34,4 +34,6 @@ if (isset($_POST['send'])) {
     }
 }
 
+$pageName = 'Inscription';
+
 include_once '../views/showSignIn.php';

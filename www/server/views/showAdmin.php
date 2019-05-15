@@ -9,13 +9,7 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
 <html>
 
 <head>
-    <title>Administrateur</title>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- Bootstrap CSS & JS -->
-    <link href='../../css/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
-    <script src='../../css/bootstrap/js/bootstrap.min.js' type='text/javascript'></script>
+    <?php include_once '../inc/head.php'; ?>
 </head>
 
 <body>
@@ -44,9 +38,9 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
                                     <td><?= date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></td>
                                     <td><?= $u->email ?></td>
                                     <td>
-                                        <a class='btn btn-primary' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
-                                        <a class='btn btn-success' href='../controllers/admin.php?idAd=<?= $ad->idAdvertisement ?>'>Valider</a>
-                                        <a class='btn btn-danger' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                                        <a class='btn btn-outline-primary myBtn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
+                                        <a class='btn btn-outline-success myBtn' href='../controllers/admin.php?idAd=<?= $ad->idAdvertisement ?>'>Valider</a>
+                                        <a class='btn btn-outline-danger myBtn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

@@ -9,13 +9,7 @@ Description : La vue de la page de création d'une annonce contenant le formulai
 <html>
 
 <head>
-    <title>Création d'une annonce</title>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- Bootstrap CSS & JS -->
-    <link href='../../css/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
-    <script src='../../css/bootstrap/js/bootstrap.min.js' type='text/javascript'></script>
+    <?php include_once '../inc/head.php'; ?>
 </head>
 
 <body>
@@ -40,7 +34,7 @@ Description : La vue de la page de création d'une annonce contenant le formulai
                     </div>
                     <div class="form-group">
                         <label for="file">Image(s) du produit</label>
-                        <input type="file" class="form-control-file" id="file" name='pictures[]' accept='image/jpeg, image/png, image/jpg' multiple> 
+                        <input type="file" class="form-control-file" id="file" name='pictures[]' accept='image/jpeg, image/png, image/jpg' multiple>
                     </div>
                     <button type="submit" class="btn btn-primary" name="send">Créer</button>
                 </form>

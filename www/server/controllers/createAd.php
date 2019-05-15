@@ -25,4 +25,6 @@ if (isset($_POST['send'])) {
     }
 }
 
+$pageName = 'Création d\'une annonce';
+
 include_once '../views/showCreateAd.php';

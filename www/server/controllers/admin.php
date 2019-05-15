@@ -20,4 +20,6 @@ if(isset($idAd)){
     }
 }
 
+$pageName = 'Administrateur';
+
 include_once '../views/showAdmin.php';

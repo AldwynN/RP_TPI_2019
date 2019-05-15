@@ -28,4 +28,6 @@ if (isset($_POST['send'])) {
     }
 }
 
+$pageName = 'Suppression de votre compte';
+
 include_once '../views/showDeleteProfil.php';

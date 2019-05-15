@@ -9,13 +9,7 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
 <html>
 
 <head>
-    <title>Accueil</title>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- Bootstrap CSS & JS -->
-    <link href='../../css/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
-    <script src='../../css/bootstrap/js/bootstrap.min.js' type='text/javascript'></script>
+    <?php include_once '../inc/head.php'; ?>
 </head>
 
 <body>
@@ -26,10 +20,10 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
         <div class='row justify-content-center'>
             <div class='col-md-10'>
                 <form class='form-row'>
-                    <input type='text' class='form-control col-7' name='searchContent' placeholder='Mettez votre recherche ici'>
-                    <input type='submit' class='btn btn-primary col-3' value='Rechercher'>
+                    <input type='text' class='form-control col-8 myBtn' name='searchContent' placeholder='Mettez votre recherche ici'>
+                    <input type='submit' class='btn btn-outline-primary col myBtn' value='Rechercher'>
                     <?php if (isset($_SESSION['email'])) : ?>
-                        <a href='../controllers/createAd.php' class='btn btn-success col-2'>+</a>
+                        <a href='../controllers/createAd.php' class='btn btn-outline-success col myBtn'>+</a>
                     <?php endif; ?>
                 </form>
             </div>
@@ -48,10 +42,10 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                         <p><?= 'Vente au ' . $u->streetAndNumber . ', ' . $u->postCode . ' ' . $u->canton ?></p>
                         <p><?= 'Posté le ' . date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
                         <div class='row justify-content-end'>
-                            <a class='btn btn-primary' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
+                            <a class='btn btn-outline-primary myBtn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
                             <?php if (isset($_SESSION['email']) && $ad->userEmail == $_SESSION['email']) : ?>
-                                <a class='btn btn-warning' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
-                                <a class='btn btn-danger' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                                <a class='btn btn-outline-warning myBtn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
+                                <a class='btn btn-outline-danger myBtn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
                             <?php endif; ?>
                         </div>
                     </div>

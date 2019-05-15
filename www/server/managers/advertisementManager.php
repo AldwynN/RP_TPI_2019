@@ -192,7 +192,7 @@ class AdvertisementManager
     }
 
     /**
-     * @brief Validation d'une annonce
+     * @brief Valide une annonce
      * @param int idAd L'id de l'annonce que l'on veut validée.
      * @return boolean True  Ok.
      * 				   False Une erreur est survenue.

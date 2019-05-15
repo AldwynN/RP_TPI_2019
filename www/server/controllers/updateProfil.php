@@ -73,4 +73,6 @@ if (isset($_POST['send'])) {
     }
 }
 
+$pageName = 'Modification de votre profil';
+
 include_once '../views/showUpdateProfil.php';

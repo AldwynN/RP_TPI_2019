@@ -10,13 +10,7 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
 <html>
 
 <head>
-    <title>Détails d'une annonce</title>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <!-- Bootstrap CSS & JS -->
-    <link href='../../css/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css' />
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
-    <script src='../../css/bootstrap/js/bootstrap.min.js' type='text/javascript'></script>
+    <?php include_once '../inc/head.php'; ?>
 </head>
 
 <body>
@@ -31,11 +25,16 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
                     <p class='text-justify'><?= $ad->description ?></p>
                     <input type='radio' id='bio' <?= ($ad->organic == 1 ? 'checked' : '') ?>>
                     <label for='bio'>Produit bio</label>
-                    <p><?= 'Vente au ' . $u->streetAndNumber . ', ' . $u->postCode . ' ' . $u->canton ?></p>
-                    <p><?= 'Posté le ' . date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
-                    <p><?= 'Annonceur : ' . $ad->userEmail ?></p>
+                    <p>Vente au <?= $u->streetAndNumber . ', ' . $u->postCode . ' ' . $u->canton ?></p>
+                    <p>Posté le <?= date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
+                    <p>Annonceur : <?= $ad->userEmail ?></p>
+                    <?php if ($score == 0) : ?>
+                        <p>Il n'y a aucune évalution de cette annonce</p>
+                    <?php else : ?>
+                        <p>Évalutation de l'annonce par les autres utilisateurs : <?= $score ?>/5</p>                        
+                    <?php endif; ?>
                     <?php foreach ($pics as $p) : ?>
-                        <img src='<?= $p->picture ?>' style='max-width: 125px; max-height: 125px;'>
+                        <img src='<?= $p->picture ?>' style='max-width: 150px; max-height: 150px;'>
                     <?php endforeach; ?>
                     <?php if (isset($_SESSION['email']) && $_SESSION['email'] == $ad->userEmail) : ?>
                         <div class='row justify-content-end'>

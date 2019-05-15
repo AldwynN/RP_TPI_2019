@@ -14,4 +14,6 @@ $email =  filter_input(INPUT_GET, 'email', FILTER_SANITIZE_STRING);
 $u = UserManager::GetUserByEmail($email);
 $ads = AdvertisementManager::GetAdsByUserEmail($email);
 
+$pageName = 'Détails de votre compte';
+
 include_once '../views/showProfil.php';

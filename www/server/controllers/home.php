@@ -16,4 +16,6 @@ if (isset($_POST['search'])) {
     // Recherche
 }
 
+$pageName = 'Accueil';
+
 include_once '../views/showHome.php';

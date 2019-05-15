@@ -14,6 +14,7 @@ $idAd = filter_input(INPUT_GET, 'idAd', FILTER_SANITIZE_STRING);
 $ad = AdvertisementManager::GetAdById($idAd);
 $u = UserManager::GetUserByEmail($ad->userEmail);
 $rates = RatingManager::GetRatingsOfAnAd($idAd);
+$score = RatingManager::GetScoreOfAnAd($idAd);
 $pics = PictureManager::GetPicturesByAdId($idAd);
 
 if (isset($_POST['send'])) {
@@ -31,5 +32,7 @@ if (isset($_POST['send'])) {
         echo '<meta http-equiv="refresh" content="2;URL=#">';
     }
 }
+
+$pageName = 'Détails d\'une annonce';
 
 include_once '../views/showAdDetails.php';

@@ -28,4 +28,6 @@ if (isset($_POST['send'])) {
     }
 }
 
+$pageName = 'Suppression d\'une annonce';
+
 include_once '../views/showDeleteAd.php';
