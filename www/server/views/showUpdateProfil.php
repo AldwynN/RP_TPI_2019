@@ -20,7 +20,7 @@ Description : La vue de la page de modification de son profil contenant le formu
         <div class='row justify-content-center'>
             <div class="col-md-8">
                 <div class="media-body">
-                    <form method="POST">
+                    <form method="POST" class='m-4'>
                         <div class="form-group">
                             <label for="newPassword">Nouveau mot de passe</label>
                             <input type="password" class="form-control" name="newPassword" id="newPassword">

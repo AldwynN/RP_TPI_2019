@@ -20,7 +20,7 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
         <div class='row justify-content-center'>
             <div class='col-md-10'>
                 <?php if (isset($ads)) : ?>
-                    <table class='table table-striped'>
+                    <table class='table table-striped m-2'>
                         <thead>
                             <th scope='col'>Titre</th>
                             <th scope='col'>Description</th>
@@ -38,9 +38,9 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
                                     <td><?= date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></td>
                                     <td><?= $u->email ?></td>
                                     <td>
-                                        <a class='btn btn-outline-primary myBtn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
-                                        <a class='btn btn-outline-success myBtn' href='../controllers/admin.php?idAd=<?= $ad->idAdvertisement ?>'>Valider</a>
-                                        <a class='btn btn-outline-danger myBtn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                                        <a class='btn btn-outline-primary my-btn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
+                                        <a class='btn btn-outline-success my-btn' href='../controllers/admin.php?idAd=<?= $ad->idAdvertisement ?>'>Valider</a>
+                                        <a class='btn btn-outline-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

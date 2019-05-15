@@ -9,6 +9,10 @@ Description : Cette page inclut la vue.
 
 require_once '../inc/inc.all.php';
 
+if(!isset($_SESSION['email']) || $_SESSION['role'] != 2){
+    header('Location: home.php');
+}
+
 $idAd = filter_input(INPUT_GET, 'idAd', FILTER_SANITIZE_NUMBER_INT);
 
 $ads = AdvertisementManager::GetInvalidAds();

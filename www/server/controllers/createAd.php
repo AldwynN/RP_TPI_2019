@@ -20,7 +20,7 @@ if (isset($_POST['send'])) {
         echo '<div class="alert alert-danger mb-0" role="alert">Message d\'erreur : "Erreur lors de la création"</div>';
     }
     if ($result) {
-        echo '<div class="alert alert-success mb-0" role="alert">Création d\'une annonce réussi</div>';
+        echo '<div class="alert alert-success mb-0" role="alert">Création d\'une annonce réussi, en attente de redirection</div>';
         echo '<meta http-equiv="refresh" content="2;URL=home.php">';
     }
 }

@@ -19,7 +19,7 @@ Description : La vue de la page de modification d'une annonce contenant le formu
         </div>
         <div class='row justify-content-center'>
             <div class='col-md-6'>
-                <form method='POST' enctype='multipart/form-data'>
+                <form method='POST' enctype='multipart/form-data' class='m-4'>
                     <div class="form-group">
                         <label for="title">Titre</label>
                         <input type="text" class="form-control" name="title" id="title" required value='<?= $ad->title ?>'>
@@ -37,23 +37,41 @@ Description : La vue de la page de modification d'une annonce contenant le formu
                         <input type="file" class="form-control-file" id="file" name='pictures[]' accept='image/jpeg, image/png, image/jpg' multiple>
                     </div>
                     <div class='form-row'>
-                        <?php foreach ($pictures as $p) : ?>
-                            <div class='text-center col-md-3'>
-                                <div class='card'>
-                                    <img src='<?= $p->picture ?>' class='card-img-top mx-auto d-block' style='max-height: 125px; max-width: 125px' alt='imgProduct'>
-                                    <div class='card-body'>
-                                        <button class='btn btn-danger' id='delete' name='<?= $p->idPicture ?>'>X</button>
+
+                    </div>
+                    <div class='form-group'>
+                        <input type="submit" class="btn btn-primary" name="send" value='Modifier'>
+                    </div>
+                </form>
+                <?php foreach ($pictures as $p) : ?>
+                    <div class='text-center col-lg-4'>
+                        <img src='<?= $p->picture ?>' class='' style='max-height: 250px; max-width: 300px' alt='imgProduct'>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-danger my-btn" data-toggle="modal" data-target="#exampleModal<?= $p->idPicture ?>">
+                            X
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal<?= $p->idPicture ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel" style='color:black;'>Êtes-vous sur de vouloir supprimer cette image ?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form method='POST'>
+                                            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Fermer</button>
+                                            <input type="submit" class="btn btn-outline-danger" value='Confirmer' name='delete'>
+                                            <input type='hidden' name='idPic' value='<?= $p->idPicture ?>'>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-
-
-                        <?php endforeach; ?>
+                        </div>
                     </div>
-                    <div class='form-group'>
-                        <button type="submit" class="btn btn-primary" name="send">Modifier</button>
-                    </div>
-                </form>
+                <?php endforeach; ?>
             </div>
         </div>
         <div class='row'>
@@ -62,20 +80,10 @@ Description : La vue de la page de modification d'une annonce contenant le formu
     </div>
 </body>
 <script>
-    const VALIDATE_URL = '';
-    const ON_SUCCESS_URL = '';
-    $(document).ready(function() {
-        $('#delete').click(deletePicture)
+    $('#myModal').on('shown.bs.modal', function() {
+        $('#myInput').trigger('focus')
     });
-
-    function deletePicture(event){
-        // Prevent form submission
-        if (event) {
-            event.preventDefault();
-        }
-        // Récupération de l'id de l'image à supprimer
-$('#delete').name()
-    }
 </script>
+
 
 </html>

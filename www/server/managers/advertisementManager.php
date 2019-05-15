@@ -54,7 +54,7 @@ class AdvertisementManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = 0';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = 0 ORDER BY creationDate DESC';
         $statement = Database::prepare($req);
 
         try {
@@ -174,21 +174,29 @@ class AdvertisementManager
     public static function UpdateAd($a)
     {
         //Initialisation de la requête
-        $req = 'UPDATE advertisements SET title = :t, description = :d, organic = :o';
+        $req = 'UPDATE advertisements SET title = :t, description = :d, organic = :o WHERE idAdvertisement = :id';
         $statement = Database::prepare($req);
 
         try {
-            $statement->execute(array(
+            if ($statement->execute(array(
                 ':t' => $a->title,
                 ':d' => $a->description,
-                ':o' => $a->organic
-            ));
+                ':o' => $a->organic,
+                ':id' => $a->idAdvertisement
+            ))) {
+                // Si aucun fichier séléctionner
+                if ($_FILES['pictures']['error'][0] == 4) {
+                    return true;
+                } else {
+                    if (PictureManager::CreatePicture(Database::lastInsertId())) {
+                        return true;
+                    }
+                }
+            }
         } catch (PDOException $e) {
             echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
-
-        return true;
     }
 
     /**

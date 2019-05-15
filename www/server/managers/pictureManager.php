@@ -82,11 +82,6 @@ class PictureManager
      */
     public static function CreatePicture($idAd)
     {
-        //Suppression de toutes les anciennes images pour les réinsérer après
-        if (!PictureManager::DeletePicturesOfAnAd($idAd)) {
-            return false;
-        }
-
         if($_FILES['pictures']['error'][0] == 4){
             return true;
         }

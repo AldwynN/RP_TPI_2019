@@ -3,10 +3,23 @@ body {
     color: lightgray;
 }
 
-.myBtn {
+.my-btn {
     margin: 2px;
-    color: white;
+    color: lightgray;
 }
 
+.my-ad {
+    margin: 5px;
+}
 
-/*.myAds {}*/
+.my-profil {
+    margin: 5px;
+}
+
+.my-navbar {
+    background-color: #4A4A4F;
+}
+
+hr {
+    background-color: white;
+}

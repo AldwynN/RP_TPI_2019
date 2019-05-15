@@ -102,7 +102,7 @@ class RatingManager
     }
 
     /**
-     * @brief Suppression de toutes les évalutions d'une annonce
+     * @brief Suppression de toutes les évaluations d'une annonce
      * @param int idAd L'id de l'annonce.
      * @return boolean True Ok.
      * 		           False Une erreur est survenue.
@@ -117,7 +117,7 @@ class RatingManager
     }
 
     /**
-     * @brief Suppression de toutes les évalutions d'un utilisateur
+     * @brief Suppression de toutes les évaluations d'un utilisateur
      * @param string email L'email de l'utilisateur.
      * @return boolean True Ok.
      * 		           False Une erreur est survenue.

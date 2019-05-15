@@ -38,8 +38,8 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
                     <?php endforeach; ?>
                     <?php if (isset($_SESSION['email']) && $_SESSION['email'] == $ad->userEmail) : ?>
                         <div class='row justify-content-end'>
-                            <a class='btn btn-warning' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
-                            <a class='btn btn-danger' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                            <a class='btn btn-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
+                            <a class='btn btn-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
                         </div>
                     <?php endif; ?>
                 </div>
