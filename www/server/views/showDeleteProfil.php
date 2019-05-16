@@ -27,7 +27,6 @@ Description : La vue de la page de suppression d'une annonce contenant un formul
                             <input type='submit' class='btn btn-outline-danger my-btn' name='send' value='Confirmer'>
                         </div>
                     </fieldset>
-
                 </form>
             </div>
         </div>

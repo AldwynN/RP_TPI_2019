@@ -31,7 +31,7 @@ Description : La vue de la page connexion contenant un formulaire
                     <div class='form-group'>
                         <small><a href='../controllers/signIn.php'>Pas encore de compte ?</a></small>
                     </div>
-                    <button type='submit' class='btn btn-primary' id='send'>Connexion</button>
+                    <button type='submit' class='btn btn-outline-primary my-btn' id='send'>Connexion</button>
                 </form>
             </div>
         </div>

@@ -38,8 +38,7 @@ if(isset($_POST['delete'])){
     
         PictureManager::DeletePicture($idPic);
         
-        echo '<div class="alert alert-success mb-0" role="alert">Image en cours de suppression</div>';
-        echo '<meta http-equiv="refresh" content="2;URL=updateAd.php?idAd=' . $idAd . '">';
+        header('Location: updateAd.php?idAd=' . $idAd);
     }
 }
 

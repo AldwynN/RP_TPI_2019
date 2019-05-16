@@ -188,7 +188,7 @@ class AdvertisementManager
                 if ($_FILES['pictures']['error'][0] == 4) {
                     return true;
                 } else {
-                    if (PictureManager::CreatePicture(Database::lastInsertId())) {
+                    if (PictureManager::CreatePicture($a->idAdvertisement)) {
                         return true;
                     }
                 }
@@ -266,5 +266,61 @@ class AdvertisementManager
         foreach ($ads as $ad) {
             AdvertisementManager::DeleteAd($ad->idAdvertisement);
         }
+    }
+
+
+
+    /**
+     * @brief Retourne les annonces en rapport avec la recherche
+     * @param string searchContent La recherche de l'utilisateur.
+     * @param boolean organic Si l'utilisateur recherche que des annonces bio.
+     * @return array Un tableau contenant toutes les annonces de type "Advertisement".
+     * 		   False Une erreur est survenue.
+     */
+    public static function Research($searchContent, $organic)
+    {
+        $arr = array();
+
+        $baseReq = "SELECT DISTINCT a.idAdvertisement, a.title, a.description, a.organic, a.valid, a.creationDate, a.email FROM users AS u, advertisements AS a WHERE ";
+
+        $withContent = "u.email = a.email AND u.city LIKE :s OR u.canton LIKE :s OR u.postCode LIKE :s OR a.title LIKE :s OR a.description LIKE :s OR
+        :sc = ( SELECT FORMAT(AVG(r.rating), 'N') FROM rates AS r WHERE r.idAdvertisement = a.idAdvertisement) ";
+
+        $withOrganic = "AND a.organic = 1";
+
+        $onlyOrganic = "a.organic = 1";
+
+        $finalReq = "";
+
+        if ($searchContent != "" && $organic) {
+            $finalReq .= $baseReq . $withContent . $withOrganic;
+        } else if ($searchContent != "" && !$organic) {
+            $finalReq .= $baseReq . $withContent;
+        } else if ($searchContent == "" && $organic) {
+            $finalReq .= $baseReq . $onlyOrganic;
+        }else{
+            return false;
+        }
+
+        $statement = Database::prepare($finalReq);
+
+        try {
+            $statement->execute(array(
+                ':s' => '%' . $searchContent . '%',
+                ':sc' => $searchContent
+            ));
+        } catch (PDOException $e) {
+            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
+            return false;
+        }
+
+        // Tant qu'il y a des entrées
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+            $a = new Advertisement($row['idAdvertisement'], $row['title'], $row['description'], $row['organic'], $row['valid'], $row['creationDate'], $row['email']);
+
+            array_push($arr, $a);
+        }
+
+        return $arr;
     }
 }

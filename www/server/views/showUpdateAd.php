@@ -40,12 +40,16 @@ Description : La vue de la page de modification d'une annonce contenant le formu
 
                     </div>
                     <div class='form-group'>
-                        <input type="submit" class="btn btn-primary" name="send" value='Modifier'>
+                        <input type="submit" class="btn btn-outline-primary my-btn" name="send" value='Modifier'>
                     </div>
                 </form>
+            </div>
+        </div>
+        <div class='row justify-content-center'>
+            <div class='row col-md-6'>
                 <?php foreach ($pictures as $p) : ?>
-                    <div class='text-center col-lg-4'>
-                        <img src='<?= $p->picture ?>' class='' style='max-height: 250px; max-width: 300px' alt='imgProduct'>
+                    <div class='text-center col-md-4'>
+                        <img src='<?= $p->picture ?>' class='img-fluid w-100 h-75' alt='imgProduct'>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-outline-danger my-btn" data-toggle="modal" data-target="#exampleModal<?= $p->idPicture ?>">
                             X

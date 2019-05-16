@@ -28,12 +28,12 @@ class Rating
 {
     /**
      * @brief	Le Constructor appelé au moment de la création de l'objet. Ie. new Rating(); 
-     * @param InIdRate  L'id de l'évalutation. Default null
+     * @param InIdRate  L'id de l'évaluation. Default null
      * @param InRating		La note donné par l'utilisateur. Defaut ""
-     * @param InComment     Le commentaire laisser sous le commentaire. Defaut ""
-     * @param InPostDate    La date de création du commentaire. Defaut ""
-     * @param InUserEmail   L'email de l'utilisateur ayant mit un commentaire. Defaut ""
-     * @param InIdAdvertisement	    L'id de l'annonce auquel le commentaire est assigné. Defaut ""
+     * @param InComment     Le commentaire. Defaut ""
+     * @param InPostDate    La date de création de l'évaluation. Defaut ""
+     * @param InUserEmail   L'email de l'utilisateur ayant mis un commentaire. Defaut ""
+     * @param InIdAdvertisement	   L'id de l'annonce auquel l’évaluation est assignée. Defaut ""
 	  */
     public function __construct($InIdRate = null, $InRating = "", $InComment = "", $InPostDate = "", $InUserEmail = "", $InIdAdvertisement = "")
     {

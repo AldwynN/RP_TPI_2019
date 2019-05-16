@@ -109,7 +109,7 @@ class PictureManager
             $statement = Database::prepare($req);
 
             try {
-                if ($statement->execute(array(':p' => $src, 'id' => $idAd))) {
+                if ($statement->execute(array(':p' => $src, ':id' => $idAd))) {
                     if (count($_FILES['pictures']['name']) == $i) {
                         return true;
                     }

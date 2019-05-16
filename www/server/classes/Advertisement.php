@@ -33,8 +33,8 @@ class Advertisement
      * @param InIdAdvertisement		L'id de l'annonce. Defaut null
      * @param InTitle	    Le Titre de l'annonce. Defaut ""
      * @param InDescription	    La description de l'annonce. Defaut ""
-     * @param InOrganic	    Un boolean définissant si l'annonce est organique ou non. Defaut ""
-     * @param InValid	    Un boolean définissant si l'annonce est validé par l'admin. Defaut null
+     * @param InOrganic	    Un bool définissant si l'annonce est organique ou non. Defaut ""
+     * @param InValid	    Un bool définissant si l'annonce est validé par l'admin. Defaut null
      * @param InCreationDate    La date de création de l'annonce. Defaut null
      * @param InUserEmail	    L'email de l'utilisateur auquel l'annonce est assigné. Defaut ""
 	  */

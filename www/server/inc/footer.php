@@ -10,5 +10,6 @@ Description : Cette page permet l'affichage du pied de page.
         <hr>
         <p>Romain Peretti - IDA-P4A - 4ème année</p>
         <p>CFPT Informatique - Travail Pratique Individuel</p>
+        <a href='#'>Retour en haut</a>
     </footer>
 </div>

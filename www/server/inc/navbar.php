@@ -14,11 +14,13 @@ Description : Cette page permet l'affichage de la barre de navigation avec les p
         <div class='collapse navbar-collapse' id='navbarText'>
             <ul class='navbar-nav mr-auto'>
                 <li class='nav-item'>
-                    <a class='nav-link' href='../controllers/home.php'>Accueil</a>
+                    <a class='nav-link' href='../controllers/home.php'><span class='fa fa-home'></span> Accueil</a>
                 </li>
                 <?php if (isset($_SESSION['email'])) : ?>
                     <li class='nav-item'>
-                        <a class='nav-link' href='../controllers/profil.php?email=<?= $_SESSION['email'] ?>'>Profil</a>
+                        <a class='nav-link' href='../controllers/profil.php?email=<?= $_SESSION['email'] ?>'>
+                        <span class='fa fa-user'></span> Profil
+                    </a>
                     </li>
                 <?php endif; ?>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] == '2') : ?>

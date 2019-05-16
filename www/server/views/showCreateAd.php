@@ -36,7 +36,7 @@ Description : La vue de la page de création d'une annonce contenant le formulai
                         <label for="file">Image(s) du produit</label>
                         <input type="file" class="form-control-file" id="file" name='pictures[]' accept='image/jpeg, image/png, image/jpg' multiple>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="send">Créer</button>
+                    <button type="submit" class="btn btn-outline-primary my-btn" name="send">Créer</button>
                 </form>
             </div>
         </div>

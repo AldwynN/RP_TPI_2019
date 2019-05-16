@@ -19,27 +19,35 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
             <?php include_once '../inc/navbar.php'; ?>
         </div>
         <div class='row justify-content-center'>
-            <div class='media border rounded col-md-10'>
+            <div class='media border rounded col-md-10 m-2'>
                 <div class='media-body'>
                     <h2><?= $ad->title ?></h2>
                     <p class='text-justify'><?= $ad->description ?></p>
-                    <input type='radio' id='bio' <?= ($ad->organic == 1 ? 'checked' : '') ?>>
-                    <label for='bio'>Produit bio</label>
+                    <?php if ($ad->organic == 1) : ?>
+                        <span class="fa fa-pagelines"></span>
+                        <label>Produit bio</label>
+                    <?php else : ?>
+                        <label>Produit non bio</label>
+                    <?php endif; ?>
                     <p>Vente au <?= $u->streetAndNumber . ', ' . $u->postCode . ' ' . $u->canton ?></p>
                     <p>Posté le <?= date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
                     <p>Annonceur : <?= $ad->userEmail ?></p>
                     <?php if ($score == 0) : ?>
                         <p>Il n'y a aucune évalution de cette annonce</p>
                     <?php else : ?>
-                        <p>Évalutation de l'annonce par les autres utilisateurs : <?= $score ?>/5</p>                        
+                        <p>Évalutation de l'annonce par les autres utilisateurs : <?= $score ?>/5</p>
                     <?php endif; ?>
-                    <?php foreach ($pics as $p) : ?>
-                        <img src='<?= $p->picture ?>' style='max-width: 150px; max-height: 150px;'>
-                    <?php endforeach; ?>
+                    <div class='row'>
+                        <?php foreach ($pics as $p) : ?>
+                            <div class=' text-center col-md-4'>
+                                <img src='<?= $p->picture ?>' class='img-fluid w-100 h-75'>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                     <?php if (isset($_SESSION['email']) && $_SESSION['email'] == $ad->userEmail) : ?>
                         <div class='row justify-content-end'>
-                            <a class='btn btn-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
-                            <a class='btn btn-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                            <a class='btn btn-outline-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
+                            <a class='btn btn-outline-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -47,7 +55,7 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
         </div>
         <div class='row justify-content-center'>
             <?php foreach ($rates as $rate) : ?>
-                <div class='col-md-5 border'>
+                <div class='col-md-5 border m-1'>
                     <h4><?= $rate->userEmail ?></h4>
                     <p class='text-justify'><?= $rate->comment ?></p>
                     <p><?= $rate->rating . '/5' ?></p>
@@ -56,7 +64,7 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
         </div>
         <?php if (isset($_SESSION['email'])) : ?>
             <div class='row justify-content-center'>
-                <div class='col-md-5 border'>
+                <div class='col-md-5 border m-1'>
                     <h3>Poster un commentaire</h3>
                     <form method='POST'>
                         <div class='form-group row'>
@@ -94,7 +102,7 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
                         </fieldset>
                         <div class="form-group row">
                             <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary" name='send'>Envoyer</button>
+                                <button type="submit" class="btn btn-outline-primary my-btn" name='send'>Envoyer</button>
                             </div>
                         </div>
                     </form>

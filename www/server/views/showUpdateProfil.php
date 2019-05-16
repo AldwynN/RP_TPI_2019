@@ -61,7 +61,7 @@ Description : La vue de la page de modification de son profil contenant le formu
                             <label for="password">Entrez votre mot de passe actuel pour appliquer les modifications</label>
                             <input type="password" class="form-control" name="password" id="password" required> 
                         </div>
-                        <button type="submit" class="btn btn-primary" name="send">Modifier</button>
+                        <button type="submit" class="btn btn-outline-primary my-btn" name="send">Modifier</button>
                     </form>
                 </div>
             </div>

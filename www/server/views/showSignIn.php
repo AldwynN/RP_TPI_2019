@@ -64,7 +64,7 @@ Description : La vue de la page d'inscription contenant un formulaire
                         <div class="form-group">
                             <small><a href="../controllers/login.php">Déjà un compte ?</a></small>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="send">Inscription</button>
+                        <button type="submit" class="btn btn-outline-primary my-btn" name="send">Inscription</button>
                     </form>
                 </div>
             </div>

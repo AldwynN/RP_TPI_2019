@@ -68,7 +68,7 @@ class RatingManager
 
         if ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
             // On garde qu'une décimal
-            $score = number_format($row['score'], 1);
+            $score = number_format($row['score'], 0);
         }
 
         return $score;

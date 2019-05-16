@@ -13,7 +13,18 @@ $ads = AdvertisementManager::GetValidatedAds();
 
 if (isset($_POST['search'])) {
     $searchContent = filter_input(INPUT_POST, 'searchContent', FILTER_SANITIZE_STRING);
-    // Recherche
+    $searchOrganic = filter_input(INPUT_POST, 'searchOrganic', FILTER_SANITIZE_STRING);
+
+    if ($searchContent != "" || isset($searchOrganic)) {
+        $results = AdvertisementManager::Research($searchContent, (isset($searchOrganic) ? true : false));
+        if ($results === false) { 
+            echo '<div class="alert alert-danger mb-0" role="alert">Une erreur est survenue lors de la recherche</div>';
+            return;
+        }
+        $ads = $results;
+    } else {
+        echo '<div class="alert alert-warning mb-0" role="alert">Veuillez entrer une recherche</div>';
+    }
 }
 
 $pageName = 'Accueil';
