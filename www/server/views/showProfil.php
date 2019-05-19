@@ -36,16 +36,26 @@ Description : La vue de la page connexion contenant les détails de l'utilisateu
         <div class='row justify-content-center'>
             <?php foreach ($ads as $ad) :
                 $u = UserManager::GetUserByEmail($ad->userEmail);
+                $score = RatingManager::GetScoreOfAnAd($ad->idAdvertisement)
                 ?>
                 <div class='media border rounded col-md-5 my-ad'>
                     <div class='media-body '>
                         <h4><?= $ad->title ?></h4>
                         <p class='text-justify'><?= $ad->description ?></p>
-                        <input type='radio' id='bio' <?= ($ad->organic == 1 ? 'checked' : '') ?>>
-                        <label for='bio'>Produit bio</label>
+                        <?php if ($ad->organic == 1) : ?>
+                            <span class="fa fa-pagelines"></span>
+                            <label>Produit bio</label>
+                        <?php else : ?>
+                            <label>Produit non bio</label>
+                        <?php endif; ?>
                         <p><?= 'Vente au ' . $u->streetAndNumber . ', ' . $u->postCode . ' ' . $u->canton ?></p>
                         <p><?= 'Posté le ' . date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
                         <p>Annonce : <?= ($ad->valid == 1 ? 'Validée' : 'Pas validée') ?></p>
+                        <?php if ($score == 0) : ?>
+                            <p>Il n'y a aucune évalution de cette annonce</p>
+                        <?php else : ?>
+                            <p>Évalutation de l'annonce par les autres utilisateurs : <?= $score ?>/5</p>
+                        <?php endif; ?>
                         <div class='row justify-content-end'>
                             <a class='btn btn-outline-primary my-btn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
                             <a class='btn btn-outline-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>

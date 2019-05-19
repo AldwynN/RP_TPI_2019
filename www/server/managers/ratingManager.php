@@ -94,7 +94,7 @@ class RatingManager
                 ':c' => $r->comment
             ));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
+            echo 'Problème de création : ' . $e->getMessage();
             return false;
         }
 
@@ -112,7 +112,12 @@ class RatingManager
         //Initialisation de la requête
         $req = 'DELETE FROM rates WHERE idAdvertisement = :id';
         $statement = Database::prepare($req);
-        $statement->execute(array(':id' => $idAd));
+        try {
+            $statement->execute(array(':id' => $idAd));
+        } catch (PDOException $e) {
+            echo 'Problème de suppression : ' . $e->getMessage();
+            return false;
+        }
         return true;
     }
 
@@ -131,7 +136,7 @@ class RatingManager
         try {
             $statement->execute(array(':e' => $email));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
+            echo 'Problème de suppression : ' . $e->getMessage();
             return false;
         }
 

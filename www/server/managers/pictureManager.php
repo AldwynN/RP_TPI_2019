@@ -82,10 +82,6 @@ class PictureManager
      */
     public static function CreatePicture($idAd)
     {
-        if($_FILES['pictures']['error'][0] == 4){
-            return true;
-        }
-
         for ($i = 1; $i <= count($_FILES['pictures']['name']); $i++) {
 
             // Index pour la superglobal $_FILES car on commence avec $i = 1
@@ -93,18 +89,18 @@ class PictureManager
 
             // vérification que le transfert c'est bien déroulé
             if (!isset($_FILES['pictures']['name'][$index]) || !is_uploaded_file($_FILES['pictures']['tmp_name'][$index])) {
-                echo ('Probleme de transfert');
-                exit;
+                echo ('<div class="alert alert-danger mb-0" role="alert">Probleme de transfert - fichier(s) invalide(s)</div>');
+                return false;
             }
             // Récupération du fichier temporaire
             $data = file_get_contents($_FILES['pictures']['tmp_name'][$index]);
-            //Récupération du MIME
-            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            // Récupération du MIME
+            $finfo = new finfo(FILEINFO_MIME_TYPE); //Pas oublier dans php.ini de dé-commenter "extension=php_fileinfo.dll"
             $mime = $finfo->file($_FILES['pictures']['tmp_name'][$index]);
-            //Création de la chaine en base 64
+            // Création de la chaine en base 64
             $src = 'data:' . $mime . ';base64,' . base64_encode($data);
 
-            //Initialisation de la requête
+            // Initialisation de la requête
             $req = 'INSERT INTO pictures(picture, idAdvertisement) VALUES (:p, :id)';
             $statement = Database::prepare($req);
 
@@ -154,7 +150,12 @@ class PictureManager
         //Initialisation de la requête
         $req = 'DELETE FROM pictures WHERE idAdvertisement = :id';
         $statement = Database::prepare($req);
-        $statement->execute(array(':id' => $idAd));
+        try {
+            $statement->execute(array(':id' => $idAd));
+        } catch (PDOException $e) {
+            echo 'Problème de suppression : ' . $e->getMessage();
+            return false;
+        }
         return true;
     }
 }

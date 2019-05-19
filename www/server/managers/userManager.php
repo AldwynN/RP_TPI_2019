@@ -132,21 +132,26 @@ class UserManager
      */
     public static function DeleteUser($email)
     {
-        // Suppression des annonces et des évalutions de l'utilisateur
-        AdvertisementManager::DeleteAdsOfUser($email);
-
         //Initialisation de la requête
         $req = 'DELETE FROM users WHERE email = :e';
         $statement = Database::prepare($req);
 
-        try {
-            $statement->execute(array(':e' => $email));
-        } catch (PDOException $e) {
-            echo 'Problème de suppression : ' . $e->getMessage();
-            return false;
-        }
+        Database::beginTransaction();
 
-        return true;
+        try {
+            // Suppression des annonces et des évalutions de l'utilisateur
+            if (AdvertisementManager::DeleteAdsOfUser($email) == false) {
+                Database::rollBack();
+                return false;
+            }
+            $statement->execute(array(':e' => $email));
+            Database::commit();
+            return true;
+        } catch (PDOException $e) {
+            Database::rollBack();
+            echo 'Problème de suppression : ' . $e->getMessage();
+        }
+        return false;
     }
 
     /**

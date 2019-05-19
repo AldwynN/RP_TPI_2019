@@ -9,8 +9,15 @@ Description : Cette page inclut la vue.
 
 require_once '../inc/inc.all.php';
 
+$idAd = null;
+$deleted = false;
+
 if (isset($_GET['idAd'])) {
     $idAd = filter_input(INPUT_GET, 'idAd', FILTER_SANITIZE_NUMBER_INT);
+}
+
+if (isset($_GET['deleted'])) {
+    $deleted = true;
 }
 
 $ad = AdvertisementManager::GetAdById($idAd);
@@ -32,13 +39,17 @@ if (isset($_POST['send'])) {
     }
 }
 
-if(isset($_POST['delete'])){
+if (isset($_POST['delete'])) {
     if (isset($_POST['idPic'])) {
+        $tmpTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        $tmpDescription = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+        $tmpOrganic = filter_input(INPUT_POST, 'organic');
+
         $idPic = filter_input(INPUT_POST, 'idPic', FILTER_SANITIZE_NUMBER_INT);
-    
+
         PictureManager::DeletePicture($idPic);
-        
-        header('Location: updateAd.php?idAd=' . $idAd);
+
+        header('Location: updateAd.php?idAd=' . $idAd . '&deleted=1');
     }
 }
 

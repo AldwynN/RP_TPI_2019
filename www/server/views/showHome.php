@@ -22,10 +22,10 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                 <form method='POST' class='m-1'>
                     <div class='form-row'>
                         <div class='form-group col-8'>
-                            <input type='text' class='form-control' name='searchContent' placeholder="Chercher par canton, ville, code postal, score, titre et description d'une annonce">
+                            <input type='text' class='form-control m-1' name='searchContent' placeholder="Chercher par canton, ville, code postal, score, titre et description d'une annonce">
                         </div>
                         <div class='form-group col'>
-                            <input type='submit' class='form-control btn btn-outline-primary my-btn' value='Rechercher' name='search'>
+                            <input type='submit' class='form-control btn btn-outline-primary my-btn m-1' value='Rechercher' name='search'>
                         </div>
                         <?php if (isset($_SESSION['email'])) : ?>
                             <div class='form-group col'>

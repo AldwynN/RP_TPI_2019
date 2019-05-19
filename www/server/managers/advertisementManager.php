@@ -147,7 +147,7 @@ class AdvertisementManager
         //Initialisation de la requête
         $req = 'INSERT INTO advertisements (title, description, organic, valid, email) VALUES (:t, :d, :o, 0, :e)';
         $statement = Database::prepare($req);
-
+        Database::beginTransaction();
         try {
             if ($statement->execute(array(
                 ':t' => $a->title,
@@ -155,14 +155,21 @@ class AdvertisementManager
                 ':o' => $a->organic,
                 ':e' => $a->userEmail
             ))) {
-                if (PictureManager::CreatePicture(Database::lastInsertId())) {
-                    return true;
+                if ($_FILES['pictures']['error'][0] != 4) {
+                    if (PictureManager::CreatePicture(Database::lastInsertId()) == false) {
+                        Database::rollBack();
+                        return false;
+                    }
                 }
+                Database::commit();
+                return true;
             }
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
-            return false;
+            Database::rollBack();
+            echo 'Problème lors de la création en base : ' . $e->getMessage();
         }
+
+        return false;
     }
 
     /**
@@ -176,7 +183,7 @@ class AdvertisementManager
         //Initialisation de la requête
         $req = 'UPDATE advertisements SET title = :t, description = :d, organic = :o WHERE idAdvertisement = :id';
         $statement = Database::prepare($req);
-
+        Database::beginTransaction();
         try {
             if ($statement->execute(array(
                 ':t' => $a->title,
@@ -184,19 +191,21 @@ class AdvertisementManager
                 ':o' => $a->organic,
                 ':id' => $a->idAdvertisement
             ))) {
-                // Si aucun fichier séléctionner
-                if ($_FILES['pictures']['error'][0] == 4) {
-                    return true;
-                } else {
-                    if (PictureManager::CreatePicture($a->idAdvertisement)) {
-                        return true;
+                //Si des images sont séléctionner
+                if ($_FILES['pictures']['error'][0] != 4) {
+                    if (PictureManager::CreatePicture($a->idAdvertisement) == false) {
+                        Database::rollBack();
+                        return false;
                     }
                 }
+                Database::commit();
+                return true;
             }
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
-            return false;
+            Database::rollBack();
+            echo 'Problème lors de la modification en base : ' . $e->getMessage();
         }
+        return false;
     }
 
     /**
@@ -232,16 +241,19 @@ class AdvertisementManager
      */
     public static function DeleteAd($idAd)
     {
-
         //Initialisation de la requête
         $req = 'DELETE FROM advertisements WHERE idAdvertisement = :idAd';
         $statement = Database::prepare($req);
 
         // Suppression des images liées avec cette annonce
-        PictureManager::DeletePicturesOfAnAd($idAd);
+        if (PictureManager::DeletePicturesOfAnAd($idAd) == false) {
+            return false;
+        }
 
         // Suppression des évalutations liées avec cette annonce
-        RatingManager::DeleteRatingsOfAnAd($idAd);
+        if(RatingManager::DeleteRatingsOfAnAd($idAd) == false){
+            return false;
+        }
 
         try {
             $statement->execute(array(':idAd' => $idAd));
@@ -264,8 +276,11 @@ class AdvertisementManager
         $ads = AdvertisementManager::GetAdsByUserEmail($email);
 
         foreach ($ads as $ad) {
-            AdvertisementManager::DeleteAd($ad->idAdvertisement);
+            if (AdvertisementManager::DeleteAd($ad->idAdvertisement) == false) {
+                return false;
+            }
         }
+        return true;
     }
 
 
@@ -298,7 +313,7 @@ class AdvertisementManager
             $finalReq .= $baseReq . $withContent;
         } else if ($searchContent == "" && $organic) {
             $finalReq .= $baseReq . $onlyOrganic;
-        }else{
+        } else {
             return false;
         }
 
