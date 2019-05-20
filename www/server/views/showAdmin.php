@@ -32,7 +32,7 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
                             <?php foreach ($ads as $ad) :
                                 $u = UserManager::GetUserByEmail($ad->userEmail)
                                 ?>
-                                <tr class='test'>
+                                <tr class='my-tr'>
                                     <td><?= $ad->title ?></td>
                                     <td><?= $ad->description ?></td>
                                     <td><?= date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></td>

@@ -19,14 +19,14 @@ Description : La vue de la page connexion contenant un formulaire
         </div>
         <div class='row justify-content-center'>
             <div class='col-md-6'>
-                <form method='POST'>
+                <form class='m-2'>
                     <div class='form-group'>
                         <label for='email'>Adresse email</label>
-                        <input type='email' class='form-control' id='email' placeholder='Entrez un email valide'>
+                        <input type='email' class='form-control my-input' id='email' placeholder='Entrez un email valide'>
                     </div>
                     <div class='form-group'>
                         <label for='password'>Mot de passe</label>
-                        <input type='password' class='form-control' id='password'>
+                        <input type='password' class='form-control my-input' id='password'>
                     </div>
                     <div class='form-group'>
                         <small><a href='../controllers/signIn.php'>Pas encore de compte ?</a></small>
@@ -85,10 +85,10 @@ Description : La vue de la page connexion contenant un formulaire
             success: function(data) {
                 switch (data.ReturnCode) {
                     case 0:
-                        alert('Mauvais email ou mot de passe')
+                        swal('Mauvais email ou mot de passe', '', 'error')
                         break;
                     case 1:
-                        alert('Mauvais email ou mot de passe')
+                        swal('Mauvais email ou mot de passe', '', 'error')
                         break;
                     case 2:
                         location.href = ON_SUCCESS_URL;

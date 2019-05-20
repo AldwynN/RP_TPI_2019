@@ -5,7 +5,7 @@ Date : 3 avril 2019
 */
 
 
-require_once 'config.php';
+require_once '../config/config.php';
 
 /**
  * Retourne un objet PDO connecté à la base de données

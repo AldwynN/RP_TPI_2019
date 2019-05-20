@@ -10,6 +10,7 @@ Description : Cette classe contient toutes les fonctions en rapport avec les uti
 
 require_once '../database/database.php';
 require_once '../classes/User.php';
+require_once '../managers/AdvertisementManager.php';
 
 class UserManager
 {

@@ -10,21 +10,22 @@ Description : Tests sur chacune des méthodes du manageur.
 require_once '../managers/pictureManager.php';
 
 // Id de l'annonce qui sera utilisée pour ces tests
-$idAd = 6;
+$idAd = 34;
 
 /**
  * Test 1 - CreatePicture()
  */
 echo '<h3>Test 1 - CreatePicture()</h3>';
-
+/*
 $p = new Picture(null, base64_encode('Picture.jpg'), $idAd);
+
 $result = PictureManager::CreatePicture($p);
 if ($result === false) {
     echo 'Problème lors de la création';
 }
 if ($result) {
     echo 'Création d\'une image réussi';
-}
+}*/
 
 /**
  * Test 2 - GetPictureById()
@@ -37,6 +38,7 @@ if ($p === false) {
 }
 if ($p) {
     echo '<pre>' . var_dump($p) . '</pre>';
+    echo '<img src="' . $p->picture . '">';
 }
 
 /**
@@ -50,6 +52,7 @@ if ($results === false) {
 }
 if ($results) {
     echo '<pre>' . var_dump($results[0]) . '</pre>';
+    echo '<img src="' . $results[0]->picture . '">';
 }
 
 /**

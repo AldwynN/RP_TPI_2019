@@ -11,6 +11,10 @@ require_once '../inc/inc.all.php';
 
 $email =  filter_input(INPUT_GET, 'email', FILTER_SANITIZE_STRING);
 
+if (isset($email) && $email != $_SESSION['email']) { 
+    header('Location: home.php');
+}
+
 $u = UserManager::GetUserByEmail($email);
 $ads = AdvertisementManager::GetAdsByUserEmail($email);
 

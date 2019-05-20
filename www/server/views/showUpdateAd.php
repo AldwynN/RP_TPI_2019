@@ -23,11 +23,11 @@ Description : La vue de la page de modification d'une annonce contenant le formu
                     <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
                     <div class="form-group">
                         <label for="title">Titre</label>
-                        <input type="text" class="form-control" name="title" id="title" required value='<?= $ad->title ?>'>
+                        <input type="text" class="form-control my-input" name="title" id="title" required value="<?= $ad->title ?>">
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" class="form-control" id="description" required><?= $ad->description ?></textarea>
+                        <textarea name="description" class="form-control my-input" id="description" required><?= $ad->description ?></textarea>
                     </div>
                     <div class="form-group">
                         <input type="checkbox" name="organic" id="organic" value="true" <?= ($ad->organic == 1 ? 'checked' : '') ?>>
@@ -36,9 +36,6 @@ Description : La vue de la page de modification d'une annonce contenant le formu
                     <div class="form-group">
                         <label for="file">Image(s) du produit</label>
                         <input type="file" class="form-control-file" id="file" name='pictures[]' accept='image/jpeg, image/png, image/jpg' multiple>
-                    </div>
-                    <div class='form-row'>
-
                     </div>
                     <div class='form-group'>
                         <input type="submit" class="btn btn-outline-primary my-btn" name="send" value='Modifier'>

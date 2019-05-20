@@ -10,6 +10,8 @@ Description : Cette classe contient toutes les fonctions en rapport avec les ann
 
 require_once '../database/database.php';
 require_once '../classes/Advertisement.php';
+require_once '../managers/pictureManager.php';
+require_once '../managers/ratingManager.php';
 
 class AdvertisementManager
 {
@@ -155,10 +157,14 @@ class AdvertisementManager
                 ':o' => $a->organic,
                 ':e' => $a->userEmail
             ))) {
-                if ($_FILES['pictures']['error'][0] != 4) {
-                    if (PictureManager::CreatePicture(Database::lastInsertId()) == false) {
-                        Database::rollBack();
-                        return false;
+                //Nécessaire pour les tests
+                if ($_FILES != array()) {
+                    //Vérification qu'il y ait bien des éléments dans la tableau
+                    if ($_FILES['pictures']['error'][0] != 4) {
+                        if (PictureManager::CreatePicture(Database::lastInsertId()) == false) {
+                            Database::rollBack();
+                            return false;
+                        }
                     }
                 }
                 Database::commit();
@@ -191,11 +197,12 @@ class AdvertisementManager
                 ':o' => $a->organic,
                 ':id' => $a->idAdvertisement
             ))) {
-                //Si des images sont séléctionner
-                if ($_FILES['pictures']['error'][0] != 4) {
-                    if (PictureManager::CreatePicture($a->idAdvertisement) == false) {
-                        Database::rollBack();
-                        return false;
+                if ($_FILES != array()) {
+                    if ($_FILES['pictures']['error'][0] != 4) {
+                        if (PictureManager::CreatePicture($a->idAdvertisement) == false) {
+                            Database::rollBack();
+                            return false;
+                        }
                     }
                 }
                 Database::commit();
@@ -251,7 +258,7 @@ class AdvertisementManager
         }
 
         // Suppression des évalutations liées avec cette annonce
-        if(RatingManager::DeleteRatingsOfAnAd($idAd) == false){
+        if (RatingManager::DeleteRatingsOfAnAd($idAd) == false) {
             return false;
         }
 

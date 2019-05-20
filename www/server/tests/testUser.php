@@ -47,7 +47,7 @@ echo '<h3>Test 2 - CreateUser()</h3>';
 
 echo '<h4>2.1 Utilisateur valide</h4>';
 // Ajout d'un utilisateur
-$u = new User('jeanPierre@gmail.com', '123', 'Lausanne', 'Vaud', '1000', '4 Rue des sapins', 'J\'aime marcher', 'iahdhguihvcniuwherhsfsdfus', '1');
+$u = new User('claude@gmail.com', '123', 'Lausanne', 'Vaud', '1000', '4 Rue des sapins', 'J\'aime marcher', 'iahdhguihvcniuwherhsfsdfus', '1');
 
 $result = UserManager::CreateUser($u);
 if ($result === false) {
@@ -81,7 +81,7 @@ if ($result === true) {
 echo '<h3>Test 3 - UpdateUser()</h3>';
 
 // Modification d'un utilisateur
-$u = new User('jeanPierre@gmail.com', '123', 'Genève', 'Genève', '1243', '1 Rue des Bouleaux', 'J\'aime danser', 'iahdhguihvcniuwherhsfsdfus', '1');
+$u = new User('claude@gmail.com', '123', 'Genève', 'Genève', '1243', '1 Rue des Bouleaux', 'J\'aime danser', 'iahdhguihvcniuwherhsfsdfus', '1');
 
 $result = UserManager::UpdateUser($u);
 if ($result === false) {
@@ -97,7 +97,7 @@ if ($result) {
 echo '<h3>Test 4 - DeleteUser()</h3>';
 
 // Supression d'un utilisateur
-$result = UserManager::DeleteUser('jeanPierre@gmail.com');
+$result = UserManager::DeleteUser('claude@gmail.com');
 if ($result === false) {
     echo 'Problème lors de la suppression';
 }
@@ -125,7 +125,7 @@ if ($result) {
 
 echo '<h4>5.2 Utilisateur inexistant</h4>';
 // Essaie avec un utilisateur inexistant
-$result = UserManager::UserExist('jeanPierre@gmail.com');
+$result = UserManager::UserExist('avcfdadsa@gmail.com');
 if ($result === false) {
     echo 'Problème lors de la récupération';
 }
@@ -134,4 +134,20 @@ if ($result === null) {
 }
 if ($result) {
     echo 'L\'utilisateur existe';
+}
+
+/**
+ * Test 6 - Login()
+ */
+echo '<h3>Test 6 - Login()</h3>';
+
+$result = UserManager::Login('romain.prtt@eduge.ch', '123');
+if ($result === false) {
+    echo 'Problème lors de la connexion';
+}
+if ($result === null) {
+    echo 'Mauvais mot de passe ou email';
+}
+if ($result) {
+    echo 'Connexion réussi';
 }

@@ -16,10 +16,6 @@ if (isset($_GET['idAd'])) {
     $idAd = filter_input(INPUT_GET, 'idAd', FILTER_SANITIZE_NUMBER_INT);
 }
 
-if (isset($_GET['deleted'])) {
-    $deleted = true;
-}
-
 $ad = AdvertisementManager::GetAdById($idAd);
 $pictures = PictureManager::GetPicturesByAdId($idAd);
 
@@ -34,22 +30,19 @@ if (isset($_POST['send'])) {
         echo '<div class="alert alert-danger mb-0" role="alert">Message d\'erreur : "Erreur lors de la modification"</div>';
     }
     if ($result) {
-        echo '<div class="alert alert-success mb-0" role="alert">Modification d\'une annonce réussi</div>';
-        echo '<meta http-equiv="refresh" content="2;URL=home.php">';
+        echo '<div class="alert alert-success mb-0" role="alert">Modification d\'une annonce réussi, en attente de redirection</div>';
+        echo '<meta http-equiv="refresh" content="1;URL=home.php">';
     }
 }
 
 if (isset($_POST['delete'])) {
     if (isset($_POST['idPic'])) {
-        $tmpTitle = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-        $tmpDescription = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-        $tmpOrganic = filter_input(INPUT_POST, 'organic');
-
+        
         $idPic = filter_input(INPUT_POST, 'idPic', FILTER_SANITIZE_NUMBER_INT);
 
         PictureManager::DeletePicture($idPic);
 
-        header('Location: updateAd.php?idAd=' . $idAd . '&deleted=1');
+        header('Location: updateAd.php?idAd=' . $idAd);
     }
 }
 

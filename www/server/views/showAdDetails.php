@@ -19,12 +19,12 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
             <?php include_once '../inc/navbar.php'; ?>
         </div>
         <div class='row justify-content-center'>
-            <div class='media border rounded col-md-10 m-2'>
+            <div class='media border rounded col-md-10 m-1 p-2'>
                 <div class='media-body'>
                     <h2><?= $ad->title ?></h2>
                     <p class='text-justify'><?= $ad->description ?></p>
                     <?php if ($ad->organic == 1) : ?>
-                        <span class="fa fa-pagelines"></span>
+                        <span class="fa fa-seedling" style='color: rgb(57, 192, 39);'></span>
                         <label>Produit bio</label>
                     <?php else : ?>
                         <label>Produit non bio</label>
@@ -35,12 +35,22 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
                     <?php if ($score == 0) : ?>
                         <p>Il n'y a aucune évalution de cette annonce</p>
                     <?php else : ?>
-                        <p>Évalutation de l'annonce par les autres utilisateurs : <?= $score ?>/5</p>
+                        <p>Évalutation de l'annonce par les autres utilisateurs :
+                            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                <?php if ($i <= $score) : ?>
+                                    <span class='fas fa-star' style='color:gold'></span>
+                                <?php else : ?>
+                                    <span class='far fa-star'></span>
+                                <?php endif; ?>
+                            <?php endfor; ?>
+                        </p>
                     <?php endif; ?>
                     <div class='row'>
                         <?php foreach ($pics as $p) : ?>
                             <div class=' text-center col-md-4'>
-                                <img src='<?= $p->picture ?>' class='img-fluid w-100 h-75'>
+                                <a href='../views/showFullPicture.php?id=<?= $p->idPicture ?>'>
+                                    <img src='<?= $p->picture ?>' class='img-fluid'>
+                                </a>
                             </div>
                         <?php endforeach; ?>
                     </div>

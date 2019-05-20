@@ -22,11 +22,11 @@ Description : La vue de la page de création d'une annonce contenant le formulai
                 <form method='POST' enctype='multipart/form-data' class='m-4'>
                     <div class="form-group">
                         <label for="title">Titre</label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Salade Romaine" required>
+                        <input type="text" class="form-control my-input" name="title" id="title" placeholder="Salade Romaine" required>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" class="form-control" id="description" required></textarea>
+                        <textarea name="description" class="form-control my-input" id="description" required></textarea>
                     </div>
                     <div class="form-group">
                         <input type="checkbox" name="organic" id="organic" value="true">

@@ -54,17 +54,25 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                             <h4><?= $ad->title ?></h4>
                             <p class='text-justify'><?= $ad->description ?></p>
                             <?php if ($ad->organic == 1) : ?>
-                                <span class="fa fa-pagelines"></span>
+                                <span class="fa fa-seedling" style='color: rgb(57, 192, 39)'></span>
                                 <label>Produit bio</label>
                             <?php else : ?>
                                 <label>Produit non bio</label>
                             <?php endif; ?>
-                            <p><?= 'Vente au ' . $u->streetAndNumber . ', ' . $u->postCode . ' ' . $u->canton ?></p>
+                            <p><?= 'Vente au ' . $u->streetAndNumber . ' ' . $u->city . ', ' . $u->postCode . ' ' . $u->canton ?></p>
                             <p><?= 'Posté le ' . date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
                             <?php if ($score == 0) : ?>
                                 <p>Il n'y a aucune évalution de cette annonce</p>
                             <?php else : ?>
-                                <p>Évalutation de l'annonce par les autres utilisateurs : <?= $score ?>/5</p>
+                                <p>Évalutation de l'annonce par les autres utilisateurs :
+                                    <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                        <?php if ($i <= $score) : ?>
+                                            <span class='fas fa-star' style='color:gold'></span>
+                                        <?php else : ?>
+                                            <span class='far fa-star'></span>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+                                </p>
                             <?php endif; ?>
                             <div class='row justify-content-end'>
                                 <a class='btn btn-outline-primary my-btn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>

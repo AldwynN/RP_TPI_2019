@@ -13,7 +13,7 @@ body {
 }
 
 .my-ad:hover {
-    box-shadow: 2px 2px 18px 1px rgba(239, 241, 162, 1);
+    box-shadow: 2px 2px 18px 2px rgb(162, 241, 215);
     transition: box-shadow 0.3s ease-in-out;
 }
 
@@ -33,6 +33,10 @@ hr {
     background-color: white;
 }
 
-.test:hover {
+.my-tr:hover {
     color: white;
+}
+
+.my-input {
+    background-color: rgb(230, 230, 230);
 }

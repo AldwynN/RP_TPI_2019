@@ -21,7 +21,7 @@ if ($results === false) {
 }
 if ($results) {
     echo '<pre>' . var_dump($results[0]) . '</pre>';
-}else{
+} else {
     echo 'Aucune annonces';
 }
 
@@ -37,7 +37,7 @@ if ($results === false) {
 }
 if ($results) {
     echo '<pre>' . var_dump($results[0]) . '</pre>';
-}else{
+} else {
     echo 'Aucune annonces';
 }
 
@@ -48,7 +48,7 @@ echo '<h3>Test 3 - GetAdById()</h3>';
 
 echo '<h4>3.1 Annonce existante</h4>';
 // Récupération d'une annonce existante
-$a = AdvertisementManager::GetAdById(1);
+$a = AdvertisementManager::GetAdById(7);
 if ($a === false) {
     echo 'Problème lors de la récupération';
 }
@@ -61,7 +61,7 @@ if ($a) {
 
 echo '<h4>3.1 Annonce inexistante</h4>';
 // Récupération d'une annonce inexistante
-$a = AdvertisementManager::GetAdById(-1);
+$a = AdvertisementManager::GetAdById(0);
 if ($a === false) {
     echo 'Problème lors de la récupération';
 }
@@ -92,17 +92,17 @@ if ($results) {
 echo '<h3>Test 5 - CreateAd()</h3>';
 
 // Ajout d'une annonce
-$a = new Advertisement(null, 'Farine de seigle', 'Farine complète', 0, null, null, 'romain.prtt@eduge.ch');
+$a = new Advertisement(null, 'Farine de seigle 4', 'Farine complète', 0, null, null, 'jack@gmail.com');
 $result = AdvertisementManager::CreateAd($a);
-if ($a === false) { 
+if ($a === false) {
     echo 'Problème lors de la création';
 }
-if ($a) { 
+if ($a) {
     echo 'Création d\'une annonce réussi';
 }
 
 //Id de l'annonce qu'on vient de créer, il est nécessaire de le modifier à chaque fois. Utiliser pour les trois derniers tests
-$idAd = 10;
+$idAd = 50;
 
 /**
  * Test 6 - UpdateAd()
@@ -110,12 +110,12 @@ $idAd = 10;
 echo '<h3>Test 6 - UpdateAd()</h3>';
 
 // Modification d'une annonce
-$a = new Advertisement($idAd, 'Farine de seigle A+', 'Farine doublement complète', 1, null, null, 'romain.prtt@eduge.ch');
+$a = new Advertisement($idAd, 'Farine de seigle 4 A+', 'Farine doublement complète', 1, null, null, 'jack@gmail.com');
 $result = AdvertisementManager::UpdateAd($a);
-if ($a === false) { 
+if ($a === false) {
     echo 'Problème lors de la modification';
 }
-if ($a) { 
+if ($a) {
     echo 'Modification d\'une annonce réussi';
 }
 
@@ -126,10 +126,10 @@ echo '<h3>Test 7 - UpdateAdToValid()</h3>';
 
 //Validation de l'annonce
 $result = AdvertisementManager::UpdateAdToValid($idAd);
-if($result === false){
+if ($result === false) {
     echo 'Problème lors de la validation';
 }
-if($result){
+if ($result) {
     echo 'Annonce validée';
 }
 
@@ -140,9 +140,37 @@ echo '<h3>Test 8 - DeleteAd()</h3>';
 
 // Suppression d'une annonce
 $result = AdvertisementManager::DeleteAd($idAd);
-if($result === false){
+if ($result === false) {
     echo 'Problème lors de la suppression';
 }
-if($result){
+if ($result) {
     echo 'Annonce supprimée';
+}
+
+/**
+ * Test 9 - DeleteAdsOfUser()
+ */
+echo '<h3>Test 9 - DeleteAdsOfUser()</h3>';
+$result = AdvertisementManager::DeleteAdsOfUser('jack@gmail.com');
+if ($result === false) {
+    echo 'Problème lors de la suppression';
+}
+if ($result) {
+    echo 'Annonces supprimées';
+}
+
+/**
+ * Test 10 - Research()
+ */
+echo '<h3>Test 10 - Research()</h3>';
+$results = AdvertisementManager::Research('Genève', false);
+if ($results === false) {
+    echo 'Problème lors de la recherche';
+}
+if ($results) {
+    if ($results != array()) {
+        echo '<pre>' . var_dump($results[0]) . '</pre>';
+    }else{
+        echo '<p>Aucunes annonces associées à cette recherche</p>';
+    }
 }
