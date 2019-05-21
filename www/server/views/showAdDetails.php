@@ -19,7 +19,7 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
             <?php include_once '../inc/navbar.php'; ?>
         </div>
         <div class='row justify-content-center'>
-            <div class='media border rounded col-md-10 m-1 p-2'>
+            <div class='media border rounded col-md-10 m-1'>
                 <div class='media-body'>
                     <h2><?= $ad->title ?></h2>
                     <p class='text-justify'><?= $ad->description ?></p>
@@ -56,8 +56,8 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
                     </div>
                     <?php if (isset($_SESSION['email']) && $_SESSION['email'] == $ad->userEmail) : ?>
                         <div class='row justify-content-end'>
-                            <a class='btn btn-outline-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
-                            <a class='btn btn-outline-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                            <a class='btn btn-outline-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'><span class='fas fa-pencil-alt'></span></a>
+                            <a class='btn btn-outline-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'><span class='fas fa-trash-alt'></span></a>
                         </div>
                     <?php endif; ?>
                 </div>

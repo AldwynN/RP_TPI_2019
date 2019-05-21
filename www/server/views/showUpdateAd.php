@@ -20,7 +20,6 @@ Description : La vue de la page de modification d'une annonce contenant le formu
         <div class='row justify-content-center'>
             <div class='col-md-6'>
                 <form method='POST' enctype='multipart/form-data' class='m-4'>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
                     <div class="form-group">
                         <label for="title">Titre</label>
                         <input type="text" class="form-control my-input" name="title" id="title" required value="<?= $ad->title ?>">
@@ -30,7 +29,7 @@ Description : La vue de la page de modification d'une annonce contenant le formu
                         <textarea name="description" class="form-control my-input" id="description" required><?= $ad->description ?></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="checkbox" name="organic" id="organic" value="true" <?= ($ad->organic == 1 ? 'checked' : '') ?>>
+                        <input type="checkbox" name="organic" id="organic" value="true" <?= ($ad->organic == ORGANIC ? 'checked' : '') ?>>
                         <label for="organic">Produit bio</label>
                     </div>
                     <div class="form-group">
@@ -75,6 +74,9 @@ Description : La vue de la page de modification d'une annonce contenant le formu
                     </div>
                 <?php endforeach; ?>
             </div>
+        </div>
+        <div class='row justify-content-center'>
+            <p><i>* Attention, la suppression des images est définitive</i></p>
         </div>
         <div class='row'>
             <?php include_once '../inc/footer.php'; ?>

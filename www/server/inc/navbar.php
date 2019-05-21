@@ -18,19 +18,18 @@ Description : Cette page permet l'affichage de la barre de navigation avec les p
                 </li>
                 <?php if (isset($_SESSION['email'])) : ?>
                     <li class='nav-item'>
-                        <a class='nav-link' href='../controllers/profil.php?email=<?= $_SESSION['email'] ?>'>
-                        <span class='fa fa-user'></span> Profil
-                    </a>
+                        <a class='nav-link' href='../controllers/profil.php?email=<?= $_SESSION['email'] ?>'><span class='fa fa-user'></span> Profil</a>
                     </li>
                 <?php endif; ?>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] == '2') : ?>
                     <li class='nav-item'>
-                        <a class='nav-link' href='../controllers/admin.php'>Administrateur</a>
+                        <a class='nav-link' href='../controllers/admin.php'><span class='fas fa-clipboard-list'></span> Administrateur</a>
+                        
                     </li>
                 <?php endif; ?>
             </ul>
             <?php if (isset($_SESSION['email'])) : ?>
-                <span class='navbar-text'><a href='../controllers/logout.php' class='btn btn-outline-danger my-btn'>Déconnexion</a></span>
+                <span class='navbar-text'><a href='../controllers/logout.php' class='btn btn-outline-danger my-btn'><span class='fas fa-power-off'></span></a></span>
             <?php else : ?>
                 <span class='navbar-text'><a href='../controllers/signIn.php' class='btn btn-outline-primary my-btn'>Inscription</a></span>
                 <span class='navbar-text'><a href='../controllers/login.php' class='btn btn-outline-primary my-btn'>Connexion</a></span>

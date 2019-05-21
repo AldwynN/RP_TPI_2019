@@ -18,25 +18,25 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
             <?php include_once '../inc/navbar.php'; ?>
         </div>
         <div class='row justify-content-center'>
-            <div class='col-md-10'>
+            <div class='col-md-7'>
                 <form method='POST' class='m-1'>
                     <div class='form-row'>
                         <div class='form-group col-8'>
                             <input type='text' class='form-control m-1' name='searchContent' placeholder="Chercher par canton, ville, code postal, score, titre et description d'une annonce">
                         </div>
                         <div class='form-group col'>
-                            <input type='submit' class='form-control btn btn-outline-primary my-btn m-1' value='Rechercher' name='search'>
+                            <button type='submit' class='form-control btn btn-outline-primary my-btn m-1' name='search'><span class='fas fa-search'></span></button>
                         </div>
                         <?php if (isset($_SESSION['email'])) : ?>
                             <div class='form-group col'>
-                                <a href='../controllers/createAd.php' class='form-control btn btn-outline-success my-btn '>Ajouter</a>
+                                <a href='../controllers/createAd.php' class='form-control btn btn-outline-success my-btn '><span class='fas fa-plus-circle'></span></a>
                             </div>
                         <?php endif; ?>
                     </div>
-                    <div class='form-row'>
+                    <div class='form-row m-1'>
                         <div class='form-group'>
                             <input type='checkbox' id='bio' name='searchOrganic'>
-                            <label for='bio'>Bio</label>
+                            <label for='bio'>Bio <span class="fa fa-seedling" style='color: rgb(57, 192, 39)'></span></label>
                         </div>
                     </div>
                 </form>
@@ -61,11 +61,12 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                             <?php endif; ?>
                             <p><?= 'Vente au ' . $u->streetAndNumber . ' ' . $u->city . ', ' . $u->postCode . ' ' . $u->canton ?></p>
                             <p><?= 'Posté le ' . date_format(date_create($ad->creationDate), 'd M Y \à H:i:s') ?></p>
+                            <p>Annonceur : <?= $ad->userEmail ?></p>
                             <?php if ($score == 0) : ?>
                                 <p>Il n'y a aucune évalution de cette annonce</p>
                             <?php else : ?>
                                 <p>Évalutation de l'annonce par les autres utilisateurs :
-                                    <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                    <?php for ($i = 1; $i <= MAX_STARS_RATING; $i++) : ?>
                                         <?php if ($i <= $score) : ?>
                                             <span class='fas fa-star' style='color:gold'></span>
                                         <?php else : ?>
@@ -75,10 +76,10 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                                 </p>
                             <?php endif; ?>
                             <div class='row justify-content-end'>
-                                <a class='btn btn-outline-primary my-btn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
+                                <a class='btn btn-outline-primary my-btn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'><span class='fas fa-stream'></span></a>
                                 <?php if (isset($_SESSION['email']) && $ad->userEmail == $_SESSION['email']) : ?>
-                                    <a class='btn btn-outline-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
-                                    <a class='btn btn-outline-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                                    <a class='btn btn-outline-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'><span class='fas fa-pencil-alt'></span></a>
+                                    <a class='btn btn-outline-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'><span class='fas fa-trash-alt'></span></a>
                                 <?php endif; ?>
                             </div>
                         </div>

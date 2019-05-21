@@ -13,6 +13,10 @@ $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_STRING);
 
 $u = UserManager::GetUserByEmail($email);
 
+if ($_SESSION['email'] != $email) {
+    header('Location: home.php');
+}
+
 if (isset($_POST['send'])) {
 
     $result = UserManager::DeleteUser($email);
@@ -21,7 +25,7 @@ if (isset($_POST['send'])) {
     }
     if ($result) {
         echo '<div class="alert alert-success mb-0" role="alert">Suppression réussi, en attente de redirection</div>';
-        echo '<meta http-equiv="refresh" content="2;URL=home.php">';
+        echo '<meta http-equiv="refresh" content="1;URL=logout.php">';
     }
 }
 

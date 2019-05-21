@@ -52,7 +52,7 @@ class User
         $this->streetAndNumber = $InStreetAndNumber;
         $this->description = $InDescription;
         $this->salt = $InSalt;
-        $this->roles_code = $InRolesCode;
+        $this->rolesCode = $InRolesCode;
     }
 
     /** @var string L'email de l'utilisateur */
@@ -80,5 +80,5 @@ class User
     public $salt;
 
     /** @var int Code du role de l'utilisateur */
-    public $roles_code;
+    public $rolesCode;
 }

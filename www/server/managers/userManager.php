@@ -27,7 +27,7 @@ class UserManager
         $u = null;
 
         //Initialisation de la requête
-        $req = 'SELECT email, password, city, canton, postCode, streetAndNumber, description, salt, roles_code FROM users WHERE email = :e';
+        $req = 'SELECT email, password, city, canton, postCode, streetAndNumber, description, salt, rolesCode FROM users WHERE email = :e';
         $statement = Database::prepare($req);
 
         try {
@@ -39,7 +39,7 @@ class UserManager
 
         //On récupère le premier élément
         if ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
-            $u = new User($row['email'], $row['password'], $row['city'], $row['canton'], $row['postCode'], $row['streetAndNumber'], $row['description'], $row['salt'], $row['roles_code']);
+            $u = new User($row['email'], $row['password'], $row['city'], $row['canton'], $row['postCode'], $row['streetAndNumber'], $row['description'], $row['salt'], $row['rolesCode']);
         }
 
         return $u;
@@ -60,14 +60,14 @@ class UserManager
         }
 
         //Initialisation de la requête
-        $req = 'INSERT INTO users (email, password, city, canton, postCode, streetAndNumber, description, salt, roles_code) VALUES (:e, :pwd, :ci, :ca, :po, :st, :d, :sa, :r)';
+        $req = 'INSERT INTO users (email, password, city, canton, postCode, streetAndNumber, description, salt, rolesCode) VALUES (:e, :pwd, :ci, :ca, :po, :st, :d, :sa, :r)';
         $statement = Database::prepare($req);
 
         //Création d'un hash
         $salt = uniqid(mt_rand(), true);
         //Encryption du mot de passe et du hash en sha1
         $encryptedPassword = sha1($u->password . $salt);
-        $roles = 1;
+        $roles = USER_CODE;
 
         try {
             $statement->execute(array(

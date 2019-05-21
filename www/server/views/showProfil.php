@@ -27,8 +27,8 @@ Description : La vue de la page connexion contenant les détails de l'utilisateu
                     <p>Rue et n° : <?= $u->streetAndNumber ?></p>
                     <p class='text-justify'>Description : <?= $u->description ?></p>
                     <div class='row justify-content-end'>
-                        <a class='btn btn-outline-warning my-btn' href='../controllers/updateProfil.php?email=<?= $u->email ?>'>Modifier</a>
-                        <a class='btn btn-outline-danger my-btn' href='../controllers/deleteProfil.php?email=<?= $u->email ?>'>Supprimer</a>
+                        <a class='btn btn-outline-warning my-btn' href='../controllers/updateProfil.php?email=<?= $u->email ?>'><span class='fas fa-pencil-alt'></span></a>
+                        <a class='btn btn-outline-danger my-btn' href='../controllers/deleteProfil.php?email=<?= $u->email ?>'><span class='fas fa-trash-alt'></span></a>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@ Description : La vue de la page connexion contenant les détails de l'utilisateu
                             <p>Il n'y a aucune évalution de cette annonce</p>
                         <?php else : ?>
                             <p>Évalutation de l'annonce par les autres utilisateurs :
-                                <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                <?php for ($i = 1; $i <= MAX_STARS_RATING; $i++) : ?>
                                     <?php if ($i <= $score) : ?>
                                         <span class='fas fa-star' style='color:gold'></span>
                                     <?php else : ?>
@@ -65,9 +65,9 @@ Description : La vue de la page connexion contenant les détails de l'utilisateu
                             </p>
                         <?php endif; ?>
                         <div class='row justify-content-end'>
-                            <a class='btn btn-outline-primary my-btn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'>Détails</a>
-                            <a class='btn btn-outline-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'>Modifier</a>
-                            <a class='btn btn-outline-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'>Supprimer</a>
+                            <a class='btn btn-outline-primary my-btn' href='../controllers/adDetails.php?idAd=<?= $ad->idAdvertisement ?>'><span class='fas fa-stream'></span></a>
+                            <a class='btn btn-outline-warning my-btn' href='../controllers/updateAd.php?idAd=<?= $ad->idAdvertisement ?>'><span class='fas fa-pencil-alt'></span></a>
+                            <a class='btn btn-outline-danger my-btn' href='../controllers/deleteAd.php?idAd=<?= $ad->idAdvertisement ?>'><span class='fas fa-trash-alt'></span></a>
                         </div>
                     </div>
                 </div>

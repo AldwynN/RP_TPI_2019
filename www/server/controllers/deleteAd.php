@@ -13,6 +13,10 @@ $idAd = filter_input(INPUT_GET, 'idAd', FILTER_SANITIZE_NUMBER_INT);
 
 $a = AdvertisementManager::GetAdById($idAd);
 
+if ($_SESSION['email'] != $a->userEmail) {
+    header('Location: home.php');
+}
+
 if (isset($_POST['send'])) {
 
     $result = AdvertisementManager::DeleteAd($idAd);
@@ -21,7 +25,7 @@ if (isset($_POST['send'])) {
     }
     if ($result) {
         echo '<div class="alert alert-success mb-0" role="alert">Suppression réussi, en attente de redirection</div>';
-        echo '<meta http-equiv="refresh" content="2;URL=home.php">';
+        echo '<meta http-equiv="refresh" content="1;URL=home.php">';
     }
 }
 

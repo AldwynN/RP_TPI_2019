@@ -1,4 +1,12 @@
 <?php
+/*
+Titre : Contrôleur du profil
+Date : Lundi, 13 mai 2019
+Auteur : Romain Peretti
+Version : 1.0
+Description : Cette page récupère tous les fichiers nécessaire pour le site
+*/
+
 //Démarrage de la session
 session_start();
 
@@ -8,6 +16,9 @@ session_start();
 
 // Fichier de connexion à la base
 require_once '../database/database.php';
+
+// Fichier de constantes
+require_once '../constants/constants.php';
 
 // Classes
 require_once '../classes/Advertisement.php';

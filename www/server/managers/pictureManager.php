@@ -87,32 +87,36 @@ class PictureManager
             // Index pour la superglobal $_FILES car on commence avec $i = 1
             $index = $i - 1;
 
-            // vérification que le transfert c'est bien déroulé
-            if (!isset($_FILES['pictures']['name'][$index]) || !is_uploaded_file($_FILES['pictures']['tmp_name'][$index])) {
-                echo ('<div class="alert alert-danger mb-0" role="alert">Probleme de transfert - fichier(s) invalide(s)</div>');
-                return false;
-            }
-            // Récupération du fichier temporaire
-            $data = file_get_contents($_FILES['pictures']['tmp_name'][$index]);
-            // Récupération du MIME
-            $finfo = new finfo(FILEINFO_MIME_TYPE); //Pas oublier dans php.ini de dé-commenter "extension=php_fileinfo.dll"
-            $mime = $finfo->file($_FILES['pictures']['tmp_name'][$index]);
-            // Création de la chaine en base 64
-            $src = 'data:' . $mime . ';base64,' . base64_encode($data);
+            // Si la taille de fichier est inférieure à 3 Mo et que son extension fait partie des extensions autorisés
+            if ($_FILES['pictures']['size'][$index] < MAX_FILE_SIZE && in_array($_FILES['pictures']['type'][$index], EXTENSION_AUTHORIZED)) {
 
-            // Initialisation de la requête
-            $req = 'INSERT INTO pictures(picture, idAdvertisement) VALUES (:p, :id)';
-            $statement = Database::prepare($req);
-
-            try {
-                if ($statement->execute(array(':p' => $src, ':id' => $idAd))) {
-                    if (count($_FILES['pictures']['name']) == $i) {
-                        return true;
-                    }
+                // vérification que le transfert c'est bien déroulé
+                if (!isset($_FILES['pictures']['name'][$index]) || !is_uploaded_file($_FILES['pictures']['tmp_name'][$index])) {
+                    echo ('<div class="alert alert-danger mb-0" role="alert">Probleme de transfert - fichier(s) invalide(s)</div>');
+                    return false;
                 }
-            } catch (PDOException $e) {
-                echo 'Problème de lecture de la base de données: ' . $e->getMessage();
-                return false;
+                // Récupération du fichier temporaire
+                $data = file_get_contents($_FILES['pictures']['tmp_name'][$index]);
+                // Récupération du MIME
+                $finfo = new finfo(FILEINFO_MIME_TYPE); //Pas oublier dans php.ini de dé-commenter "extension=php_fileinfo.dll"
+                $mime = $finfo->file($_FILES['pictures']['tmp_name'][$index]);
+                // Création de la chaine en base 64
+                $src = 'data:' . $mime . ';base64,' . base64_encode($data);
+
+                // Initialisation de la requête
+                $req = 'INSERT INTO pictures(picture, idAdvertisement) VALUES (:p, :id)';
+                $statement = Database::prepare($req);
+
+                try {
+                    if ($statement->execute(array(':p' => $src, ':id' => $idAd))) {
+                        if (count($_FILES['pictures']['name']) == $i) {
+                            return true;
+                        }
+                    }
+                } catch (PDOException $e) {
+                    echo 'Problème de lecture de la base de données: ' . $e->getMessage();
+                    return false;
+                }
             }
         }
     }

@@ -13,9 +13,9 @@ $email = filter_input(INPUT_GET, 'email', FILTER_SANITIZE_STRING);
 
 $u = UserManager::GetUserByEmail($email);
 
-define('VALID', 0);
-define('PWD_NOT_VALID', 1);
-define('NEW_PWD_NOT_EQUAL', 2);
+if ($_SESSION['email'] != $email) {
+    header('Location: home.php');
+}
 
 if (isset($_POST['send'])) {
 
@@ -28,11 +28,11 @@ if (isset($_POST['send'])) {
         $newPwd  = filter_input(INPUT_POST, 'newPassword', FILTER_SANITIZE_STRING);
         $repeatNewPwd  = filter_input(INPUT_POST, 'repeatNewPassword', FILTER_SANITIZE_STRING);
 
-        if (isset($newPwd) && isset($repeatNewPwd)) {
+        if ($newPwd != "" && $repeatNewPwd != "") {
             if ($newPwd == $repeatNewPwd) {
                 // Changement du MDP
                 $finalPwd = $newPwd;
-                $state = VALID;
+                $state = OK;
             } else {
                 // Erreur répétition du nouveau MDP
                 $state = NEW_PWD_NOT_EQUAL;
@@ -40,7 +40,7 @@ if (isset($_POST['send'])) {
         } else {
             // Pas de changement du MDP
             $finalPwd = $pwd;
-            $state = VALID;
+            $state = OK;
         }
     } else {
         // Erreur de MDP
@@ -48,7 +48,7 @@ if (isset($_POST['send'])) {
     }
 
     switch ($state) {
-        case VALID:
+        case OK:
             $canton  = filter_input(INPUT_POST, 'canton', FILTER_SANITIZE_STRING);
             $city  = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
             $postCode  = filter_input(INPUT_POST, 'postCode', FILTER_SANITIZE_STRING);
@@ -59,7 +59,7 @@ if (isset($_POST['send'])) {
 
             if (UserManager::UpdateUser($u)) {
                 echo '<div class="alert alert-success mb-0" role="alert">Modification effectuée, en attente de redirection</div>';
-                echo '<meta http-equiv="refresh" content="2;URL=profil.php?email=' . $_SESSION['email'] . '">';
+                echo '<meta http-equiv="refresh" content="1;URL=profil.php?email=' . $_SESSION['email'] . '">';
             } else {
                 echo '<div class="alert alert-danger mb-0" role="alert">Message d\'erreur : "Erreur lors de la modification"</div>';
             }

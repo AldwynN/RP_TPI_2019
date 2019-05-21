@@ -147,7 +147,7 @@ class AdvertisementManager
     public static function CreateAd($a)
     {
         //Initialisation de la requête
-        $req = 'INSERT INTO advertisements (title, description, organic, valid, email) VALUES (:t, :d, :o, 0, :e)';
+        $req = 'INSERT INTO advertisements (title, description, organic, valid, email) VALUES (:t, :d, :o, :v, :e)';
         $statement = Database::prepare($req);
         Database::beginTransaction();
         try {
@@ -155,6 +155,7 @@ class AdvertisementManager
                 ':t' => $a->title,
                 ':d' => $a->description,
                 ':o' => $a->organic,
+                ':v' => INVALID,
                 ':e' => $a->userEmail
             ))) {
                 //Nécessaire pour les tests
@@ -198,6 +199,7 @@ class AdvertisementManager
                 ':id' => $a->idAdvertisement
             ))) {
                 if ($_FILES != array()) {
+                    // Si des fichiers on été télécharger
                     if ($_FILES['pictures']['error'][0] != 4) {
                         if (PictureManager::CreatePicture($a->idAdvertisement) == false) {
                             Database::rollBack();
@@ -229,7 +231,7 @@ class AdvertisementManager
 
         try {
             $statement->execute(array(
-                ':v' => 1,
+                ':v' => VALID,
                 ':idAd' => $idAd
             ));
         } catch (PDOException $e) {
@@ -303,14 +305,13 @@ class AdvertisementManager
     {
         $arr = array();
 
-        $baseReq = "SELECT DISTINCT a.idAdvertisement, a.title, a.description, a.organic, a.valid, a.creationDate, a.email FROM users AS u, advertisements AS a WHERE ";
+        $baseReq = "SELECT DISTINCT a.idAdvertisement, a.title, a.description, a.organic, a.valid, a.creationDate, a.email FROM users AS u, advertisements AS a WHERE a.valid = 1 AND ";
 
-        $withContent = "u.email = a.email AND u.city LIKE :s OR u.canton LIKE :s OR u.postCode LIKE :s OR a.title LIKE :s OR a.description LIKE :s OR
-        :sc = ( SELECT FORMAT(AVG(r.rating), 'N') FROM rates AS r WHERE r.idAdvertisement = a.idAdvertisement) ";
+        $withContent = "u.email = a.email AND u.city LIKE :s OR u.canton LIKE :s OR u.postCode LIKE :s OR a.title LIKE :s OR a.description LIKE :s OR :sc = ( SELECT FORMAT(AVG(r.rating), 'N') FROM rates AS r WHERE r.idAdvertisement = a.idAdvertisement) ";
 
-        $withOrganic = "AND a.organic = 1";
+        $withOrganic = "AND a.organic = 1 ";
 
-        $onlyOrganic = "a.organic = 1";
+        $onlyOrganic = "a.organic = 1 ";
 
         $finalReq = "";
 
