@@ -27,7 +27,7 @@ if ($result === null) {
 if ($result) {
     $u = UserManager::GetUserByEmail($email);
     $_SESSION['email'] = $email;
-    $_SESSION['role'] = $u->rolesCode;
+    $_SESSION['role'] = $u->roleCode;
     echo '{"ReturnCode": 2, "Message": "Email et mot de passe valide"}';
     exit();
 }

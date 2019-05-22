@@ -33,11 +33,11 @@ Description : La vue de la page de modification de son profil contenant le formu
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="canton">Canton</label>
-                                    <input type="text" class="form-control my-input" name="canton" id="canton" required value='<?= $u->canton ?>'>
+                                    <input type="text" class="form-control my-input" name="canton" id="canton" required value='<?= (isset($_POST['canton']) ? $_POST['canton'] : $u->canton) ?>'>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="city">Ville</label>
-                                    <input type="text" class="form-control my-input" name="city" id="city" required value='<?= $u->city ?>'>
+                                    <input type="text" class="form-control my-input" name="city" id="city" required value='<?= (isset($_POST['city']) ? $_POST['city'] : $u->city) ?>'>
                                 </div>
                             </div>
                         </div>
@@ -45,21 +45,21 @@ Description : La vue de la page de modification de son profil contenant le formu
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="postCode">Code postal</label>
-                                    <input type="text" class="form-control my-input" name="postCode" id="postCode" required value='<?= $u->postCode ?>'>
+                                    <input type="text" class="form-control my-input" name="postCode" id="postCode" required value='<?= (isset($_POST['postCode']) ? $_POST['postCode'] : $u->postCode) ?>'>
                                 </div>
                                 <div class="col-md-9">
                                     <label for="streetAndNumber">Rue et numéro</label>
-                                    <input type="text" class="form-control my-input" name="streetAndNumber" id="streetAndNumber" required value='<?= $u->streetAndNumber ?>'>
+                                    <input type="text" class="form-control my-input" name="streetAndNumber" id="streetAndNumber" required value='<?= (isset($_POST['streetAndNumber']) ? $_POST['streetAndNumber'] : $u->streetAndNumber) ?>'>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" class="form-control my-input" id="description"><?= $u->description ?></textarea>
+                            <textarea name="description" class="form-control my-input" id="description"><?= (isset($_POST['description']) ? $_POST['description'] : $u->description) ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="password">Entrez votre mot de passe actuel pour appliquer les modifications</label>
-                            <input type="password" class="form-control my-input" name="password" id="password" required> 
+                            <input type="password" class="form-control my-input" name="password" id="password" required>
                         </div>
                         <button type="submit" class="btn btn-outline-primary my-btn" name="send">Modifier</button>
                     </form>

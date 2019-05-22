@@ -27,22 +27,50 @@ class UserManager
         $u = null;
 
         //Initialisation de la requête
-        $req = 'SELECT email, password, city, canton, postCode, streetAndNumber, description, salt, rolesCode FROM users WHERE email = :e';
+        $req = 'SELECT email, password, city, canton, postCode, streetAndNumber, description, salt, roleCode FROM users WHERE email = :e';
         $statement = Database::prepare($req);
 
         try {
             $statement->execute(array(':e' => $email));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base : ' . $e->getMessage();
             return false;
         }
 
         //On récupère le premier élément
         if ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
-            $u = new User($row['email'], $row['password'], $row['city'], $row['canton'], $row['postCode'], $row['streetAndNumber'], $row['description'], $row['salt'], $row['rolesCode']);
+            $u = new User($row['email'], $row['password'], $row['city'], $row['canton'], $row['postCode'], $row['streetAndNumber'], $row['description'], $row['salt'], $row['roleCode']);
         }
 
         return $u;
+    }
+
+    /**
+     * @brief Retourne tous les utilisateurs (non admin)
+     * @return array Un tableau contenant tous les utilisateurs de type "User"
+     *          False Une erreur est survenue.
+     */
+    public static function GetUsers()
+    {
+        $arr = array();
+
+        //Initialisation de la requête
+        $req = 'SELECT email, password, city, canton, postCode, streetAndNumber, description, salt, roleCode FROM users';
+        $statement = Database::prepare($req);
+
+        try {
+            $statement->execute();
+        } catch (PDOException $e) {
+            return false;
+        }
+
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            //On crée une variable de la classe User
+            $u = new User($row['email'], $row['password'], $row['city'], $row['canton'], $row['postCode'], $row['streetAndNumber'], $row['description'], $row['salt'], $row['roleCode']);
+            //Et on l'ajoute dans le tableau qu'on retourne à la fin
+            array_push($arr, $u);
+        }
+
+        return $arr;
     }
 
     /**
@@ -60,7 +88,7 @@ class UserManager
         }
 
         //Initialisation de la requête
-        $req = 'INSERT INTO users (email, password, city, canton, postCode, streetAndNumber, description, salt, rolesCode) VALUES (:e, :pwd, :ci, :ca, :po, :st, :d, :sa, :r)';
+        $req = 'INSERT INTO users (email, password, city, canton, postCode, streetAndNumber, description, salt, roleCode) VALUES (:e, :pwd, :ci, :ca, :po, :st, :d, :sa, :r)';
         $statement = Database::prepare($req);
 
         //Création d'un hash
@@ -82,7 +110,6 @@ class UserManager
                 ':r' => $roles
             ));
         } catch (PDOException $e) {
-            echo 'Problème de création : ' . $e->getMessage();
             return false;
         }
 
@@ -118,7 +145,48 @@ class UserManager
                 ':e' => $u->email
             ));
         } catch (PDOException $e) {
-            echo 'Problème de modification : ' . $e->getMessage();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @brief Modifie un utilisateur en administrateur
+     * @param string email L'email de l'utilisateur que l'on veut modifier.
+     * @return boolean True  Ok.
+     *                 False Une erreur est survenue.
+     */
+    public static function UpdateUserToAdmin($email)
+    {
+        //Initialisation de la requête
+        $req = 'UPDATE users SET roleCode = ' . ADMINISTRATOR_CODE . ' WHERE email = :e';
+        $statement = Database::prepare($req);
+
+        try {
+            $statement->execute(array(':e' => $email));
+        } catch (PDOException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @brief Modifie un administrateur en utilisateur
+     * @param string email L'email de l'utilisateur que l'on veut modifier.
+     * @return boolean True  Ok.
+     *                 False Une erreur est survenue.
+     */
+    public static function UpdateAdminToUser($email)
+    { 
+        //Initialisation de la requête
+        $req = 'UPDATE users SET roleCode = ' . USER_CODE . ' WHERE email = :e';
+        $statement = Database::prepare($req);
+
+        try {
+            $statement->execute(array(':e' => $email));
+        } catch (PDOException $e) {
             return false;
         }
 
@@ -150,7 +218,6 @@ class UserManager
             return true;
         } catch (PDOException $e) {
             Database::rollBack();
-            echo 'Problème de suppression : ' . $e->getMessage();
         }
         return false;
     }
@@ -171,7 +238,6 @@ class UserManager
         try {
             $statement->execute(array(':e' => $email));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base : ' . $e->getMessage();
             return false;
         }
 
@@ -205,7 +271,6 @@ class UserManager
         try {
             $statement->execute(array(':e' => $email));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base : ' . $e->getMessage();
             return false;
         }
 

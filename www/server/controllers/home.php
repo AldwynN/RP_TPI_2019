@@ -18,11 +18,11 @@ if (isset($_POST['search'])) {
 
     if ($searchContent != "" || isset($searchOrganic)) {
         $results = AdvertisementManager::Research($searchContent, (isset($searchOrganic) ? true : false), $searchOption);
-        if ($results === false) {
+        if (isset($results)) {
+            $ads = $results;
+        }else if($results === false){
             echo '<div class="alert alert-danger mb-0" role="alert">Une erreur est survenue lors de la recherche</div>';
-            return;
         }
-        $ads = $results;
     } else {
         echo '<div class="alert alert-warning mb-0" role="alert">Veuillez entrer une recherche</div>';
     }

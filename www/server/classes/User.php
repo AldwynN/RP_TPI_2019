@@ -40,9 +40,9 @@ class User
      * @param InStreetAndNumber	    Le numéro et le nom de la rue de l'utilisateur. Defaut ""
      * @param InDescription	    La description de l'utilisateur. Defaut ""
      * @param InSalt	    Le salt du mot de passe de l'utilisateur. Defaut ""
-     * @param InRolesCode	    Le code du rôle de l'utilisateur. Defaut ""
+     * @param InRoleCode	    Le code du rôle de l'utilisateur. Defaut ""
 	  */
-    public function __construct($InEmail = "", $InPassword = "", $InCity = "", $InCanton = "", $InPostCode = "", $InStreetAndNumber = "", $InDescription = "", $InSalt = "", $InRolesCode = "")
+    public function __construct($InEmail = "", $InPassword = "", $InCity = "", $InCanton = "", $InPostCode = "", $InStreetAndNumber = "", $InDescription = "", $InSalt = "", $InRoleCode = "")
     {
         $this->email = $InEmail;
         $this->password = $InPassword;
@@ -52,7 +52,7 @@ class User
         $this->streetAndNumber = $InStreetAndNumber;
         $this->description = $InDescription;
         $this->salt = $InSalt;
-        $this->rolesCode = $InRolesCode;
+        $this->roleCode = $InRoleCode;
     }
 
     /** @var string L'email de l'utilisateur */
@@ -80,5 +80,5 @@ class User
     public $salt;
 
     /** @var int Code du role de l'utilisateur */
-    public $rolesCode;
+    public $roleCode;
 }

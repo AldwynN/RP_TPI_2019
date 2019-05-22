@@ -28,7 +28,7 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                                 <option value='postCode'>Code postal</option>
                                 <option value='title'>Titre de l'annonce</option>
                                 <option value='description'>Description de l'annonce</option>
-                                <option value='score'>Score</option>
+                                <option value='score'>Évaluation de l'annonce</option>
                             </select>
                         </div>
                         <div class='form-group col-6'>
@@ -39,7 +39,7 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                         </div>
                         <?php if (isset($_SESSION['email'])) : ?>
                             <div class='form-group col'>
-                                <a href='../controllers/createAd.php' class='form-control btn btn-outline-success my-btn '><span class='fas fa-plus-circle'></span></a>
+                                <a href='../controllers/createAd.php' class='form-control btn btn-outline-success my-btn m-1'><span class='fas fa-plus-circle'></span></a>
                             </div>
                         <?php endif; ?>
                     </div>

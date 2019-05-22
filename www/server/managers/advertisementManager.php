@@ -31,7 +31,6 @@ class AdvertisementManager
         try {
             $statement->execute();
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -62,7 +61,6 @@ class AdvertisementManager
         try {
             $statement->execute();
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -95,7 +93,6 @@ class AdvertisementManager
         try {
             $statement->execute(array(':idAd' => $idAd));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -124,7 +121,6 @@ class AdvertisementManager
         try {
             $statement->execute(array(':e' => $email));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -173,7 +169,6 @@ class AdvertisementManager
             }
         } catch (PDOException $e) {
             Database::rollBack();
-            echo 'Problème lors de la création en base : ' . $e->getMessage();
         }
 
         return false;
@@ -212,7 +207,6 @@ class AdvertisementManager
             }
         } catch (PDOException $e) {
             Database::rollBack();
-            echo 'Problème lors de la modification en base : ' . $e->getMessage();
         }
         return false;
     }
@@ -235,7 +229,6 @@ class AdvertisementManager
                 ':idAd' => $idAd
             ));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -267,7 +260,6 @@ class AdvertisementManager
         try {
             $statement->execute(array(':idAd' => $idAd));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -307,19 +299,41 @@ class AdvertisementManager
 
         $baseReq = "SELECT DISTINCT a.idAdvertisement, a.title, a.description, a.organic, a.valid, a.creationDate, a.email FROM advertisements AS a, users AS u WHERE a.valid = 1 AND a.email = u.email ";
 
-        $withContent = "AND :so LIKE :sc ";
-
         $withOrganic = "AND a.organic = 1 ";
 
-        $finalReq = "";
+        switch ($searchOption) {
+            case 'city':
+                $withContent = "AND u.city LIKE :sc ";
+                $searchContent = "%$searchContent%";
+                break;
+            case 'canton':
+                $withContent = "AND u.canton LIKE :sc ";
+                $searchContent = "%$searchContent%";
+                break;
+            case 'postCode':
+                $withContent = "AND u.postCode LIKE :sc ";
+                $searchContent = "%$searchContent%";
+                break;
+            case 'title':
+                $withContent = "AND a.title LIKE :sc ";
+                $searchContent = "%$searchContent%";
+                break;
+            case 'description':
+                $withContent = "AND a.description LIKE :sc ";
+                $searchContent = "%$searchContent%";
+                break;
+            case 'score':
+                $withContent = "AND :sc = (SELECT FORMAT(AVG(r.rating), 'N') FROM rates AS r WHERE r.idAdvertisement = a.idAdvertisement)";
+                break;
+        }
 
         if ($searchContent != "" && $organic) {
             $finalReq = $baseReq . $withContent . $withOrganic;
         } else if ($searchContent != "" && !$organic) {
             $finalReq = $baseReq . $withContent;
-        }else if($searchContent == "" && $organic){
+        } else if ($searchContent == "" && $organic) {
             $finalReq = $baseReq . $withOrganic;
-        }else{
+        } else {
             return false;
         }
 
@@ -327,16 +341,14 @@ class AdvertisementManager
 
         try {
             $statement->execute(array(
-                ':so' => SEARCH_OPTIONS[$searchOption],
-                ':sc' => '%' . $searchContent . '%'
+                ':sc' => $searchContent
             ));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
         // Tant qu'il y a des entrées
-        while ($row = $statement->fetch(PDO::FETCH_ASSOC, PDO::FETCH_ORI_NEXT)) {
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
             $a = new Advertisement($row['idAdvertisement'], $row['title'], $row['description'], $row['organic'], $row['valid'], $row['creationDate'], $row['email']);
 
             array_push($arr, $a);

@@ -30,7 +30,6 @@ class PictureManager
         try {
             $statement->execute(array(':id' => $idPicture));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -59,7 +58,6 @@ class PictureManager
         try {
             $statement->execute(array(':id' => $idAd));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -114,7 +112,6 @@ class PictureManager
                         }
                     }
                 } catch (PDOException $e) {
-                    echo 'Problème de lecture de la base de données: ' . $e->getMessage();
                     return false;
                 }
             }
@@ -136,7 +133,6 @@ class PictureManager
         try {
             $statement->execute(array(':id' => $idPicture));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -157,7 +153,6 @@ class PictureManager
         try {
             $statement->execute(array(':id' => $idAd));
         } catch (PDOException $e) {
-            echo 'Problème de suppression : ' . $e->getMessage();
             return false;
         }
         return true;

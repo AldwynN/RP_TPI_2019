@@ -18,8 +18,11 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
             <?php include_once '../inc/navbar.php'; ?>
         </div>
         <div class='row justify-content-center'>
-            <div class='col-md-10'>
+            <div class='col-md-10 mb-5'>
                 <?php if (isset($ads)) : ?>
+                    <div class='text-center'>
+                        <h2>Annonce en attente de validation</h2>
+                    </div>
                     <table class='table table-striped m-2'>
                         <thead>
                             <th scope='col'>#</th>
@@ -27,7 +30,7 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
                             <th scope='col'>Description</th>
                             <th scope='col'>Date</th>
                             <th scope='col'>Annonceur</th>
-                            <th scope='col'><span class=''></span></th>
+                            <th scope='col'></span></th>
                         </thead>
                         <tbody>
                             <?php foreach ($ads as $ad) :
@@ -56,7 +59,7 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
                                                         </button>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form method='POST' >
+                                                        <form method='POST'>
                                                             <button type="button" class="btn btn-outline-secondary " data-dismiss="modal">Fermer</button>
                                                             <input type="submit" class="btn btn-outline-danger" value='Confirmer' name='delete'>
                                                             <input type='hidden' name='idAd' value='<?= $ad->idAdvertisement ?>'>
@@ -73,6 +76,55 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
 
                 <?php else : ?>
                     <h1 class='text-center'>Aucune nouvelles annonces</h1>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class='row justify-content-center'>
+            <div class='col-md-10'>
+                <?php if (isset($users)) : ?>
+                    <div class='text-center'>
+                        <h2>Liste des utilisateurs enregistrés</h2>
+                    </div>
+                    <table class='table table-striped m-2'>
+                        <thead>
+                            <th scope='col'>#</th>
+                            <th scope='col'>Email</th>
+                            <th scope='col'>Ville</th>
+                            <th scope='col'>Canton</th>
+                            <th scope='col'>Rue et N°</th>
+                            <th scope='col'>Description</th>
+                            <th scope='col' class='text-center'>Admin ?</th>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($users as $u) :
+                                $usersNumber++;
+                                ?>
+                                <tr class='my-tr'>
+                                    <th scope='row'><?= $usersNumber ?></th>
+                                    <td><?= $u->email ?></td>
+                                    <td><?= $u->city ?></td>
+                                    <td><?= $u->canton ?></td>
+                                    <td><?= $u->streetAndNumber ?></td>
+                                    <td><?= $u->description ?></td>
+                                    <td class='text-center'>
+                                        <form method='POST'>
+                                            <?php if ($u->roleCode == USER_CODE) : ?>
+                                                <button type='submit' name='updateToAdmin' class='btn btn-outline-success my-btn'>
+                                                    <span class='fas fa-check'></span>
+                                                </button>
+                                                <input type='hidden' name='userEmail' value='<?= $u->email ?>'>
+                                            <?php else : ?>
+                                                <button type='submit' name='updateToUser' class='btn btn-outline-danger my-btn'>
+                                                    <span class='fas fa-times'></span>
+                                                </button>
+                                                <input type='hidden' name='userEmail' value='<?= $u->email ?>'>
+                                            <?php endif; ?>
+                                            
+                                        </form>
+                                    </td>
+                                <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 <?php endif; ?>
             </div>
         </div>

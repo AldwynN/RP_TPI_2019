@@ -8,6 +8,7 @@ Description : Cette page contient toutes les constantes
 */
 
 define('MAX_STARS_RATING', 5);
+
 define('USER_CODE', 1);
 define('ADMINISTRATOR_CODE', 2);
 
@@ -27,5 +28,3 @@ define('NO_DOWNLOADED_PICTURE', 4);
 define('OK', 0);
 define('PWD_NOT_VALID', 1);
 define('NEW_PWD_NOT_EQUAL', 2);
-
-define('SEARCH_OPTIONS', array('city' => 'u.city', 'canton' => 'u.canton', 'postCode' => 'u.postCode', 'title' => 'a.title', 'description' => 'a.description'));

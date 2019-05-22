@@ -30,7 +30,6 @@ class RatingManager
         try {
             $statement->execute(array(':idAd' => $idAd));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -62,7 +61,6 @@ class RatingManager
         try {
             $statement->execute(array(':idAd' => $idAd));
         } catch (PDOException $e) {
-            echo 'Problème de lecture de la base de données: ' . $e->getMessage();
             return false;
         }
 
@@ -94,7 +92,6 @@ class RatingManager
                 ':c' => $r->comment
             ));
         } catch (PDOException $e) {
-            echo 'Problème de création : ' . $e->getMessage();
             return false;
         }
 
@@ -115,7 +112,6 @@ class RatingManager
         try {
             $statement->execute(array(':id' => $idAd));
         } catch (PDOException $e) {
-            echo 'Problème de suppression : ' . $e->getMessage();
             return false;
         }
         return true;
@@ -136,7 +132,6 @@ class RatingManager
         try {
             $statement->execute(array(':e' => $email));
         } catch (PDOException $e) {
-            echo 'Problème de suppression : ' . $e->getMessage();
             return false;
         }
 
