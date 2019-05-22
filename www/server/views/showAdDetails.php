@@ -68,7 +68,15 @@ Description : La vue de la page de détails d'une annonce contenant un les infor
                 <div class='col-md-5 border m-1'>
                     <h4><?= $rate->userEmail ?></h4>
                     <p class='text-justify'><?= $rate->comment ?></p>
-                    <p><?= $rate->rating . '/5' ?></p>
+                    <p>
+                        <?php for ($i = 1; $i <= 5; $i++) : ?>
+                            <?php if ($i <= $rate->rating) : ?>
+                                <span class='fas fa-star' style='color:gold'></span>
+                            <?php else : ?>
+                                <span class='far fa-star'></span>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+                    </p>
                 </div>
             <?php endforeach; ?>
         </div>
