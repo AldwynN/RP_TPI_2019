@@ -27,3 +27,5 @@ define('NO_DOWNLOADED_PICTURE', 4);
 define('OK', 0);
 define('PWD_NOT_VALID', 1);
 define('NEW_PWD_NOT_EQUAL', 2);
+
+define('SEARCH_OPTIONS', array('city' => 'u.city', 'canton' => 'u.canton', 'postCode' => 'u.postCode', 'title' => 'a.title', 'description' => 'a.description'));

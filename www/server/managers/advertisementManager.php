@@ -301,27 +301,25 @@ class AdvertisementManager
      * @return array Un tableau contenant toutes les annonces de type "Advertisement".
      * 		   False Une erreur est survenue.
      */
-    public static function Research($searchContent, $organic)
+    public static function Research($searchContent, $organic, $searchOption)
     {
         $arr = array();
 
-        $baseReq = "SELECT DISTINCT a.idAdvertisement, a.title, a.description, a.organic, a.valid, a.creationDate, a.email FROM users AS u, advertisements AS a WHERE a.valid = 1 AND ";
+        $baseReq = "SELECT DISTINCT a.idAdvertisement, a.title, a.description, a.organic, a.valid, a.creationDate, a.email FROM advertisements AS a, users AS u WHERE a.valid = 1 AND a.email = u.email ";
 
-        $withContent = "u.email = a.email AND u.city LIKE :s OR u.canton LIKE :s OR u.postCode LIKE :s OR a.title LIKE :s OR a.description LIKE :s OR :sc = ( SELECT FORMAT(AVG(r.rating), 'N') FROM rates AS r WHERE r.idAdvertisement = a.idAdvertisement) ";
+        $withContent = "AND :so LIKE :sc ";
 
         $withOrganic = "AND a.organic = 1 ";
-
-        $onlyOrganic = "a.organic = 1 ";
 
         $finalReq = "";
 
         if ($searchContent != "" && $organic) {
-            $finalReq .= $baseReq . $withContent . $withOrganic;
+            $finalReq = $baseReq . $withContent . $withOrganic;
         } else if ($searchContent != "" && !$organic) {
-            $finalReq .= $baseReq . $withContent;
-        } else if ($searchContent == "" && $organic) {
-            $finalReq .= $baseReq . $onlyOrganic;
-        } else {
+            $finalReq = $baseReq . $withContent;
+        }else if($searchContent == "" && $organic){
+            $finalReq = $baseReq . $withOrganic;
+        }else{
             return false;
         }
 
@@ -329,8 +327,8 @@ class AdvertisementManager
 
         try {
             $statement->execute(array(
-                ':s' => '%' . $searchContent . '%',
-                ':sc' => $searchContent
+                ':so' => SEARCH_OPTIONS[$searchOption],
+                ':sc' => '%' . $searchContent . '%'
             ));
         } catch (PDOException $e) {
             echo 'Problème de lecture de la base de données: ' . $e->getMessage();

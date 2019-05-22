@@ -15,7 +15,7 @@ if (isset($_POST['send'])) {
     $repeatPassword = filter_input(INPUT_POST, 'repeatPassword', FILTER_SANITIZE_STRING);
     if ($password == $repeatPassword) {
 
-        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $canton = filter_input(INPUT_POST, 'canton', FILTER_SANITIZE_STRING);
         $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
         $postCode = filter_input(INPUT_POST, 'postCode', FILTER_SANITIZE_STRING);

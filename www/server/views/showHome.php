@@ -21,8 +21,18 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
             <div class='col-md-7'>
                 <form method='POST' class='m-1'>
                     <div class='form-row'>
-                        <div class='form-group col-8'>
-                            <input type='text' class='form-control m-1' name='searchContent' placeholder="Chercher par canton, ville, code postal, score, titre et description d'une annonce">
+                        <div class='form-group col-3'>
+                            <select class="form-control m-1" name="searchOption">
+                                <option value='city'>Ville</option>
+                                <option value='canton'>Canton</option>
+                                <option value='postCode'>Code postal</option>
+                                <option value='title'>Titre de l'annonce</option>
+                                <option value='description'>Description de l'annonce</option>
+                                <option value='score'>Score</option>
+                            </select>
+                        </div>
+                        <div class='form-group col-6'>
+                            <input type='text' class='form-control m-1' name='searchContent' placeholder="Recherche">
                         </div>
                         <div class='form-group col'>
                             <button type='submit' class='form-control btn btn-outline-primary my-btn m-1' name='search'><span class='fas fa-search'></span></button>

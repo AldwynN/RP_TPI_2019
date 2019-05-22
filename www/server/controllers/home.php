@@ -14,10 +14,11 @@ $ads = AdvertisementManager::GetValidatedAds();
 if (isset($_POST['search'])) {
     $searchContent = filter_input(INPUT_POST, 'searchContent', FILTER_SANITIZE_STRING);
     $searchOrganic = filter_input(INPUT_POST, 'searchOrganic', FILTER_SANITIZE_STRING);
+    $searchOption = filter_input(INPUT_POST, 'searchOption', FILTER_SANITIZE_STRING);
 
     if ($searchContent != "" || isset($searchOrganic)) {
-        $results = AdvertisementManager::Research($searchContent, (isset($searchOrganic) ? true : false));
-        if ($results === false) { 
+        $results = AdvertisementManager::Research($searchContent, (isset($searchOrganic) ? true : false), $searchOption);
+        if ($results === false) {
             echo '<div class="alert alert-danger mb-0" role="alert">Une erreur est survenue lors de la recherche</div>';
             return;
         }
