@@ -1,6 +1,8 @@
+CREATE DATABASE  IF NOT EXISTS `direct_prod` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `direct_prod`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: direct_prod
+-- Host: localhost    Database: direct_prod
 -- ------------------------------------------------------
 -- Server version	8.0.15
 
@@ -16,96 +18,64 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Création du schema de la base de données
+-- Table structure for table `advertisements`
 --
 
-CREATE DATABASE direct_prod;
-USE direct_prod;
-
-
---
--- Table structure for table `advertisement`
---
-
-DROP TABLE IF EXISTS `advertisement`;
+DROP TABLE IF EXISTS `advertisements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `advertisement` (
-  `idAdvertisement` int(11) NOT NULL,
+CREATE TABLE `advertisements` (
+  `idAdvertisement` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(45) DEFAULT NULL,
   `description` text,
   `organic` tinyint(4) DEFAULT NULL,
   `valid` tinyint(4) DEFAULT NULL,
+  `creationDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idAdvertisement`),
   KEY `userForeignKey_idx` (`email`),
-  CONSTRAINT `userToAdvertisementForeignKey` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_advertisements_users1` FOREIGN KEY (`email`) REFERENCES `users` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `advertisement`
+-- Table structure for table `pictures`
 --
 
-LOCK TABLES `advertisement` WRITE;
-/*!40000 ALTER TABLE `advertisement` DISABLE KEYS */;
-/*!40000 ALTER TABLE `advertisement` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `picture`
---
-
-DROP TABLE IF EXISTS `picture`;
+DROP TABLE IF EXISTS `pictures`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `picture` (
-  `idPicture` int(11) NOT NULL,
-  `picture` mediumblob,
-  `mime` varchar(20) DEFAULT NULL,
+CREATE TABLE `pictures` (
+  `idPicture` int(11) NOT NULL AUTO_INCREMENT,
+  `picture` longtext,
   `idAdvertisement` int(11) DEFAULT NULL,
   PRIMARY KEY (`idPicture`),
-  KEY `advertisementToPictureForeignKey_idx` (`idAdvertisement`),
-  CONSTRAINT `advertisementToPictureForeignKey` FOREIGN KEY (`idAdvertisement`) REFERENCES `advertisement` (`idAdvertisement`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_pictures_advertisements1_idx` (`idAdvertisement`),
+  CONSTRAINT `fk_pictures_advertisements1` FOREIGN KEY (`idAdvertisement`) REFERENCES `advertisements` (`idAdvertisement`)
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `picture`
+-- Table structure for table `rates`
 --
 
-LOCK TABLES `picture` WRITE;
-/*!40000 ALTER TABLE `picture` DISABLE KEYS */;
-/*!40000 ALTER TABLE `picture` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rate`
---
-
-DROP TABLE IF EXISTS `rate`;
+DROP TABLE IF EXISTS `rates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `rate` (
-  `email` varchar(45) NOT NULL,
-  `idAdvertisement` int(11) DEFAULT NULL,
+CREATE TABLE `rates` (
+  `idRate` int(11) NOT NULL AUTO_INCREMENT,
   `rating` int(11) DEFAULT NULL,
   `comment` text,
-  PRIMARY KEY (`email`),
-  KEY `advertisementForeignKey_idx` (`idAdvertisement`),
-  CONSTRAINT `advertisementToRateForeignKey` FOREIGN KEY (`idAdvertisement`) REFERENCES `advertisement` (`idAdvertisement`) ON DELETE CASCADE,
-  CONSTRAINT `userToRateForeignKey` FOREIGN KEY (`email`) REFERENCES `user` (`email`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `postDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `email` varchar(45) DEFAULT NULL,
+  `idAdvertisement` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idRate`),
+  KEY `fk_rates_advertisements1_idx` (`idAdvertisement`),
+  KEY `fk_rates_users1` (`email`),
+  CONSTRAINT `fk_rates_advertisements1` FOREIGN KEY (`idAdvertisement`) REFERENCES `advertisements` (`idAdvertisement`),
+  CONSTRAINT `fk_rates_users1` FOREIGN KEY (`email`) REFERENCES `users` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rate`
---
-
-LOCK TABLES `rate` WRITE;
-/*!40000 ALTER TABLE `rate` DISABLE KEYS */;
-/*!40000 ALTER TABLE `rate` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `roles`
@@ -122,22 +92,13 @@ CREATE TABLE `roles` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roles`
+-- Table structure for table `users`
 --
 
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user`
---
-
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `password` varchar(40) DEFAULT NULL,
   `city` varchar(45) DEFAULT NULL,
@@ -146,21 +107,12 @@ CREATE TABLE `user` (
   `streetAndNumber` varchar(45) DEFAULT NULL,
   `description` text,
   `salt` varchar(45) DEFAULT NULL,
-  `roles_code` int(11) NOT NULL,
+  `roleCode` int(11) NOT NULL,
   PRIMARY KEY (`email`),
-  KEY `fk_user_roles1_idx` (`roles_code`),
-  CONSTRAINT `fk_user_roles1` FOREIGN KEY (`roles_code`) REFERENCES `roles` (`code`)
+  KEY `fk_user_roles1_idx` (`roleCode`),
+  CONSTRAINT `fk_user_roles1` FOREIGN KEY (`roleCode`) REFERENCES `roles` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user`
---
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -171,4 +123,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-08 12:54:06
+-- Dump completed on 2019-05-23 15:05:22

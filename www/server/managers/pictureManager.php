@@ -96,7 +96,7 @@ class PictureManager
                 // Récupération du fichier temporaire
                 $data = file_get_contents($_FILES['pictures']['tmp_name'][$index]);
                 // Récupération du MIME
-                $finfo = new finfo(FILEINFO_MIME_TYPE); //Pas oublier dans php.ini de dé-commenter "extension=php_fileinfo.dll"
+                $finfo = new finfo(FILEINFO_MIME_TYPE); //Pas oublier dans php.ini de décommenter "extension=php_fileinfo.dll"
                 $mime = $finfo->file($_FILES['pictures']['tmp_name'][$index]);
                 // Création de la chaine en base 64
                 $src = 'data:' . $mime . ';base64,' . base64_encode($data);

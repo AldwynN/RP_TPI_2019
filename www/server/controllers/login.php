@@ -1,6 +1,6 @@
 <?php
 /*
-Titre : Controlleur de l'accueil
+Titre : Controlleur de la connexion
 Date : Mardi, 14 mai 2019
 Auteur : Romain Peretti
 Version : 1.0

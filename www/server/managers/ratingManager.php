@@ -1,6 +1,6 @@
 <?php
 /*
-Titre : Manageur des commentaires et des notes
+Titre : Manageur des évaluations
 Date : 9 mai 2019
 Auteur : Romain Peretti
 Version : 1.0

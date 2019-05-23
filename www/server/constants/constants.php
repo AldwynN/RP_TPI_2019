@@ -1,6 +1,6 @@
 <?php
 /*
-Titre : Contrôleur du profil
+Titre : Constantes du site
 Date : Mardi, 21 mai 2019
 Auteur : Romain Peretti
 Version : 1.0

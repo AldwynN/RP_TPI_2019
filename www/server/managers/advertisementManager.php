@@ -290,6 +290,7 @@ class AdvertisementManager
      * @brief Retourne les annonces en rapport avec la recherche
      * @param string searchContent La recherche de l'utilisateur.
      * @param boolean organic Si l'utilisateur recherche que des annonces bio.
+     * @param string searchOption L'option de recherche.
      * @return array Un tableau contenant toutes les annonces de type "Advertisement".
      * 		   False Une erreur est survenue.
      */

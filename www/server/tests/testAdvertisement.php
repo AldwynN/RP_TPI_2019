@@ -163,7 +163,7 @@ if ($result) {
  * Test 10 - Research()
  */
 echo '<h3>Test 10 - Research()</h3>';
-$results = AdvertisementManager::Research('Genève', false);
+$results = AdvertisementManager::Research('geneve', false, 'city');
 if ($results === false) {
     echo 'Problème lors de la recherche';
 }

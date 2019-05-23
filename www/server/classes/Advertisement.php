@@ -13,7 +13,7 @@
  * 
  *          Exemple d'utilisation 1
  *          $a = new Advertisement();
- *          $a->idAdvertisement = 1;
+ *          $a->idAdvertisement = null;
  *          $a->title = "Farine de blé";
  *          $a->description = "Farine de blé complet";
  *          $a->organic = true;
@@ -23,7 +23,7 @@
  * 
  * 
  *          Exemple d'utilisation 2
- *          $a = new Advertisement(1, "Farine de blé", "Farine de blé complet", true, true, "2019-05-13 10:00:00", "romain.prtt@eduge.ch");
+ *          $a = new Advertisement(null, "Farine de blé", "Farine de blé complet", true, true, "2019-05-13 10:00:00", "romain.prtt@eduge.ch");
  */
 class Advertisement
 {

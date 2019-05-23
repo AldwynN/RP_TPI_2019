@@ -1,6 +1,6 @@
 <?php
 /*
-Titre : Contrôleur de la validation des annonces
+Titre : Contrôleur de l'administrateur
 Date : Mardi, 14 mai 2019 / modifier le jeudi, 22 mai 2019
 Auteur : Romain Peretti
 Version : 2.0

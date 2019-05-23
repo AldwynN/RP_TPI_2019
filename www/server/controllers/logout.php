@@ -2,6 +2,7 @@
 /*
 Auteur : php.net
 Lien : https://www.php.net/manual/fr/function.session-destroy.php
+Date : Mardi, 14 mai 2019
 */
 
 // Initialisation de la session.

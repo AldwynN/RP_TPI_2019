@@ -1,4 +1,11 @@
 <?php
+/*
+Titre : Page de validation de la connexion
+Date : Mardi, 14 mai 2019 / modifier le jeudi, 22 mai 2019
+Auteur : Romain Peretti
+Version : 2.0
+Description : Cette page récupère les champs envoyer par la page de connexion et test la connexion. Elle retourne un code en json
+*/
 
 require_once '../inc/inc.all.php';
 

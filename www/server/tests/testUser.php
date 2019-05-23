@@ -151,3 +151,29 @@ if ($result === null) {
 if ($result) {
     echo 'Connexion réussi';
 }
+
+/**
+ * Test 7 - UpdateAdminToUser()
+ */
+echo '<h3>Test 5 - UpdateAdminToUser()</h3>';
+
+$result = UserManager::UpdateAdminToUser('romain.prtt@eduge.ch');
+if ($result === false) {
+    echo 'Problème lors de la modification';
+}
+if ($result === null) {
+    echo 'L\'administrateur a été modifié';
+}
+
+/**
+ * Test 8 - UpdateUserToAdmin()
+ */
+echo '<h3>Test 5 - UpdateUserToAdmin()</h3>';
+
+$result = UserManager::UpdateUserToAdmin('romain.prtt@eduge.ch');
+if ($result === false) {
+    echo 'Problème lors de la modification';
+}
+if ($result) {
+    echo 'L\'utilisateur a été modifié';
+}

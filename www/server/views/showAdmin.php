@@ -23,7 +23,7 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
                     <div class='text-center'>
                         <h2>Annonce en attente de validation</h2>
                     </div>
-                    <table class='table table-striped m-2'>
+                    <table class='table table-striped table-responsive m-2'>
                         <thead>
                             <th scope='col'>#</th>
                             <th scope='col'>Titre</th>
@@ -119,7 +119,7 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
                                                 </button>
                                                 <input type='hidden' name='userEmail' value='<?= $u->email ?>'>
                                             <?php endif; ?>
-                                            
+
                                         </form>
                                     </td>
                                 <?php endforeach; ?>

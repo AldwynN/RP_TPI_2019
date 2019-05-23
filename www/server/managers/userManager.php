@@ -1,6 +1,6 @@
 <?php
 /*
-Titre : Manageur des utilisateur
+Titre : Manageur des utilisateurs
 Date : 9 mai 2019
 Auteur : Romain Peretti
 Version : 1.0
