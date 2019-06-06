@@ -25,7 +25,7 @@ class AdvertisementManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = 1 ORDER BY creationDate DESC';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = ' . VALID . ' ORDER BY creationDate DESC';
         $statement = Database::prepare($req);
 
         try {
@@ -55,7 +55,7 @@ class AdvertisementManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = 0 ORDER BY creationDate DESC';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE valid = ' . INVALID .' ORDER BY creationDate DESC';
         $statement = Database::prepare($req);
 
         try {
@@ -115,7 +115,7 @@ class AdvertisementManager
         $arr = array();
 
         //Initialisation de la requête
-        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE email = :e';
+        $req = 'SELECT idAdvertisement, title, description, organic, valid, creationDate, email FROM advertisements WHERE email = :e ORDER BY creationDate DESC';
         $statement = Database::prepare($req);
 
         try {
@@ -281,6 +281,12 @@ class AdvertisementManager
                 return false;
             }
         }
+
+        $return = RatingManager::DeleteRatingsOfUser($email);
+        if($return === false){
+            return false;
+        }
+
         return true;
     }
 

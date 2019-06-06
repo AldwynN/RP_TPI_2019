@@ -63,7 +63,7 @@ Description : La vue de la page d'accueil contenant toutes les annonces valides
                         <div class='media-body'>
                             <h4><?= $ad->title ?></h4>
                             <p class='text-justify'><?= $ad->description ?></p>
-                            <?php if ($ad->organic == 1) : ?>
+                            <?php if ($ad->organic == ORGANIC) : ?>
                                 <span class="fa fa-seedling" style='color: rgb(57, 192, 39)'></span>
                                 <label>Produit bio</label>
                             <?php else : ?>

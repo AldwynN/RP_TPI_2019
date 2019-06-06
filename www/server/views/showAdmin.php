@@ -19,11 +19,11 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
         </div>
         <div class='row justify-content-center'>
             <div class='col-md-10 mb-5'>
-                <?php if (isset($ads)) : ?>
+                <?php if (count($ads) > 0) : ?>
                     <div class='text-center'>
                         <h2>Annonce en attente de validation</h2>
                     </div>
-                    <table class='table table-striped table-responsive m-2'>
+                    <table class='table table-striped m-2'>
                         <thead>
                             <th scope='col'>#</th>
                             <th scope='col'>Titre</th>
@@ -81,7 +81,7 @@ Description : La vue de la page d'administration contenant un tableaux avec tout
         </div>
         <div class='row justify-content-center'>
             <div class='col-md-10'>
-                <?php if (isset($users)) : ?>
+                <?php if (count($users) > 0) : ?>
                     <div class='text-center'>
                         <h2>Liste des utilisateurs enregistrés</h2>
                     </div>

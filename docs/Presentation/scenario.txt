@@ -1,0 +1,21 @@
+Scénario démo :
+
+visualitation des annonces et de leurs détails en tant que visiteur
+
+création d'un compte et connexion ?
+
+re-visualitation avec les changements
+
+création de l'annonce "Farine de blé" avec une mauvaise image
+
+voir son profil -> modifier l'image de l'annonce
+
+
+
+admin :
+
+se connecter avec l'admin -> se rendre sur la page d'administration
+
+valider l'annonce précédemment créée
+
+modifier un utilisateur en admin -> se connecter avec celui-ci pour le prouver et se remettre en tant que utilisateur stendard pour la redirection vers la page d'accueil
