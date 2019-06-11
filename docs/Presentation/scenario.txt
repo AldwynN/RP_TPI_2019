@@ -2,13 +2,15 @@ Scénario démo :
 
 visualitation des annonces et de leurs détails en tant que visiteur
 
-création d'un compte et connexion ?
+connexion
 
 re-visualitation avec les changements
 
 création de l'annonce "Farine de blé" avec une mauvaise image
 
 voir son profil -> modifier l'image de l'annonce
+
+mettre une evaluation
 
 
 
